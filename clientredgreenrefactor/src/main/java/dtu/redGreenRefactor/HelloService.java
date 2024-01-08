@@ -10,7 +10,7 @@ public class HelloService {
 	
 	public HelloService() {
 	Client client = ClientBuilder.newClient();
-	this.webTarget = client.target("http://fm-13.compute.dtu.dk:8080");
+	this.webTarget = client.target("http://localhost:8080");
 	}
 	
 	public String hello() {

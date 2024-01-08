@@ -25,7 +25,7 @@ public class PersonService {
 
 	public PersonService() {
 	Client client = ClientBuilder.newClient();
-	this.webTarget = client.target("http://fm-13.compute.dtu.dk:8080");
+	this.webTarget = client.target("http://localhost:8080");
 	}
 	
 	public List<Person> getPerson() {
