@@ -11,7 +11,7 @@ class CustomerResourceTest {
     @Test
     void testPersonEndpoint() {
         given()
-          .when().get("/person")
+          .when().get("/customer")
           .then()
              .statusCode(200);
     }

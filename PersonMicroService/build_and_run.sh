@@ -1,3 +1,3 @@
 mvn package
-docker build --tag CustomerService .
+docker build --tag customerservice .
 docker-compose up -d

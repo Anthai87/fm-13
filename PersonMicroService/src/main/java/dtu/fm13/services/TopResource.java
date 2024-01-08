@@ -8,8 +8,8 @@ import jakarta.ws.rs.Path;
 public class TopResource {
     CustomerResource customerResource = new CustomerResource();
    
-    @Path("person")
-    public CustomerService getPersonResource() {
+    @Path("customer")
+    public CustomerService getCustomerService() {
       	return new CustomerService(customerResource);
         
     }

@@ -29,7 +29,7 @@ public class PersonService {
 	}
 	
 	public List<Person> getPerson() {
-		WebTarget personWebTarget = webTarget.path("/person");
+		WebTarget personWebTarget = webTarget.path("/customer");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.get();
 		List<Person> personList = response.readEntity(new GenericType<List<Person>>() {});
@@ -38,7 +38,7 @@ public class PersonService {
 	}
 
 	public int add(Person person) {
-		WebTarget personWebTarget = webTarget.path("/person");
+		WebTarget personWebTarget = webTarget.path("/customer");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.post(Entity.entity(person, MediaType.APPLICATION_JSON));
 		return response.getStatus();
