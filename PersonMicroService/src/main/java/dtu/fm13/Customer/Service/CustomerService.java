@@ -1,9 +1,9 @@
-package dtu.fm13.resource;
+package dtu.fm13.Customer.Service;
 
 import java.util.List;
 
-import dtu.fm13.customer.Customer;
-import dtu.fm13.services.CustomerResource;
+import Model.Customer;
+import dtu.fm13.Customer.Resource.CustomerResource;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;

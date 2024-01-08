@@ -1,4 +1,4 @@
-package dtu.fm13.customer;
+package dtu.fm13.Customer;
 
 
 public class Payment {

@@ -1,4 +1,4 @@
-package dtu.redGreenRefactor;
+package dtu.fm13.customer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import dtu.redGreenRefactor.main.model.Person;
+import dtu.fm13.customer.model.Customer;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -18,29 +18,29 @@ import jakarta.ws.rs.core.Response;
 
 
 
-public class PersonService {
-	private List<Person> persons = new ArrayList<Person>();
+public class CustomerService {
+	private List<Customer> customers = new ArrayList<Customer>();
 
 	WebTarget webTarget;
 
-	public PersonService() {
+	public CustomerService() {
 	Client client = ClientBuilder.newClient();
 	this.webTarget = client.target("http://localhost:8080");
 	}
 	
-	public List<Person> getPerson() {
+	public List<Customer> getPerson() {
 		WebTarget personWebTarget = webTarget.path("/customer");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.get();
-		List<Person> personList = response.readEntity(new GenericType<List<Person>>() {});
+		List<Customer> personList = response.readEntity(new GenericType<List<Customer>>() {});
 		
 		return personList;
 	}
 
-	public int add(Person person) {
+	public int add(Customer customer) {
 		WebTarget personWebTarget = webTarget.path("/customer");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
-		Response response = invocationBuilder.post(Entity.entity(person, MediaType.APPLICATION_JSON));
+		Response response = invocationBuilder.post(Entity.entity(customer, MediaType.APPLICATION_JSON));
 		return response.getStatus();
 	}
 }

@@ -1,4 +1,4 @@
-package dtu.fm13.customer;
+package Model;
 
 public class Customer {
     private int id;

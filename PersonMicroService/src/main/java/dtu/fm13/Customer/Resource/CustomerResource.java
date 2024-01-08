@@ -1,10 +1,10 @@
-package dtu.fm13.services;
+package dtu.fm13.Customer.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dtu.fm13.customer.Payment;
-import dtu.fm13.customer.Customer;
+import Model.Customer;
+import dtu.fm13.Customer.Payment;
 
 public class CustomerResource {
 

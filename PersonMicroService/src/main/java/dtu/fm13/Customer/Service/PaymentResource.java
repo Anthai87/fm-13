@@ -1,8 +1,8 @@
-package dtu.fm13.resource;
+package dtu.fm13.Customer.Service;
 
 
-import dtu.fm13.customer.Payment;
-import dtu.fm13.services.CustomerResource;
+import dtu.fm13.Customer.Payment;
+import dtu.fm13.Customer.Resource.CustomerResource;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;

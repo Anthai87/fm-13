@@ -1,7 +1,7 @@
-package dtu.fm13.services;
+package dtu.fm13.Customer.Resource;
 
-import dtu.fm13.resource.PaymentResource;
-import dtu.fm13.resource.CustomerService;
+import dtu.fm13.Customer.Service.CustomerService;
+import dtu.fm13.Customer.Service.PaymentResource;
 import jakarta.ws.rs.Path;
 
 @Path("/")

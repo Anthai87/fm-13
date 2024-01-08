@@ -1,4 +1,4 @@
-package dtu.redGreenRefactor;
+package dtu.fm13.customer;
 
 public class Payment {
 	private int payerId;
