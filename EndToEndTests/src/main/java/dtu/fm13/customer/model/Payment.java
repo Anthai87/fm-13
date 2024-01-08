@@ -1,4 +1,4 @@
-package dtu.fm13.customer;
+package dtu.fm13.customer.model;
 
 public class Payment {
 	private int payerId;

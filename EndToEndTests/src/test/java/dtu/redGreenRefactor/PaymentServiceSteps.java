@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-import dtu.fm13.customer.Payment;
 import dtu.fm13.customer.PaymentService;
 import dtu.fm13.customer.model.Customer;
+import dtu.fm13.customer.model.Payment;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

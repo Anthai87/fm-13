@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import dtu.fm13.customer.model.Customer;
+import dtu.fm13.customer.model.Payment;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
