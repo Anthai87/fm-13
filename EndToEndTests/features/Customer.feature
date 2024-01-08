@@ -8,7 +8,7 @@ Scenario: person service getPersonJson returns correct answer
 Scenario: add customer to DTU pay
 	Given a customer with name "Jane" and andress "Sin City"
 	When the customer is registered with DTU Pay
-	Then the customer is registered with DTU Pay
+	Then the customer is registered
 
 #Scenario: person service getPersonXml returns correct answer
 #	When I call the hello service to get person via Xml

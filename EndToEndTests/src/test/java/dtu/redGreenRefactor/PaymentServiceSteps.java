@@ -66,52 +66,8 @@ public class PaymentServiceSteps {
 		payment.setPayerId(cust);
 		payment.setAmount(amount);
 		payment.setRecieverId(mer);
-
-		boolean predicate = false;
-		for (Payment payment2 : payments) {
-			if (payment2.equals(payment)) {
-				predicate = true;
-				break;
-			}
-		}
-		assertTrue(predicate);
+		assertTrue(payments.contains(payment));
 	}
 
-	@Given("a customer with a bank account with balance {int}")
-	public void aCustomerWithABankAccountWithBalance(Integer int1) {
-
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
-	}
-
-	@Given("that the customer is registered with DTU Pay")
-	public void thatTheCustomerIsRegisteredWithDTUPay() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
-	}
-
-	@Given("a merchant with a bank account with balance {int}")
-	public void aMerchantWithABankAccountWithBalance(Integer int1) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
-	}
-
-	@Given("that the merchant is registered with DTU Pay")
-	public void thatTheMerchantIsRegisteredWithDTUPay() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
-	}
-
-	@Then("the balance of the customer at the bank is {int} kr")
-	public void theBalanceOfTheCustomerAtTheBankIsKr(Integer int1) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
-	}
-
-	@Then("the balance of the merchant at the bank is {int} kr")
-	public void theBalanceOfTheMerchantAtTheBankIsKr(Integer int1) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
-	}
 
 }

@@ -1,6 +1,7 @@
 package dtu.redGreenRefactor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +44,11 @@ public class PersonServiceSteps {
 	    
 	}
 
-	@Then("the person is registered")
+	@Then("the customer is registered")
 	public void thePersonIsRegistered() {
-	    assertEquals(200,responseCode);
+		customers = customerService.getPerson();
+	    assertEquals(204,responseCode);
+	    assertTrue(customers.contains(customer));
 	}
 
 }

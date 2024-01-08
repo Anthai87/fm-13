@@ -1,5 +1,7 @@
 package dtu.fm13.customer.model;
 
+import java.util.Objects;
+
 public class Payment {
 	private int payerId;
 	private int recieverId;
@@ -37,12 +39,19 @@ public class Payment {
 		this.amount = amount;
 	}
 	
-	public boolean equals(Payment payment) {
-		if (payment.getAmount() == this.amount && payment.getPayerId() == this.payerId && payment.getRecieverId() == this.recieverId) {
-				return true;
-		}
-		return false;
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) return true;
+	    if (obj == null || getClass() != obj.getClass()) return false;
+	    Payment payment = (Payment) obj;
+	    return amount == payment.amount &&
+	            payerId == payment.payerId &&
+	            recieverId == payment.recieverId;
 	}
+	@Override
+    public int hashCode() {
+        return Objects.hash(payerId, recieverId,amount);
+    }
 }
 
 
