@@ -1,7 +1,8 @@
-package org.RedGreenRefactor;
+package dtu.fm13.resource;
 
 
-import dtu.redGreenRefactor.main.model.Payment;
+import dtu.fm13.customer.Payment;
+import dtu.fm13.services.CustomerResource;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -9,21 +10,20 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentResource {
     
-    private HelloService helloService;
+    private CustomerResource customerResource;
 
-	public PaymentResource(HelloService helloService) {
-       this.helloService = helloService;
+	public PaymentResource(CustomerResource customerResource) {
+       this.customerResource = customerResource;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Payment> getAllPayments() {
-        return helloService.getPayments();
+        return customerResource.getPayments();
     }
 
     @POST
@@ -31,8 +31,8 @@ public class PaymentResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postPayment(Payment payment) {
 
-        if (helloService.existsPerson(payment.getPayerId()) && helloService.existsPerson(payment.getRecieverId())) {
-            helloService.addPayment(payment);
+        if (customerResource.existsCustomer(payment.getPayerId()) && customerResource.existsCustomer(payment.getRecieverId())) {
+            customerResource.addPayment(payment);
             return Response.status(Response.Status.CREATED).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();

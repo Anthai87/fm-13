@@ -1,4 +1,4 @@
-package dtu.redGreenRefactor.main.model;
+package dtu.fm13.customer;
 
 
 public class Payment {

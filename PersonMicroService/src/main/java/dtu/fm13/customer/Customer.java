@@ -1,11 +1,11 @@
-package dtu.redGreenRefactor.main.model;
+package dtu.fm13.customer;
 
-public class Person {
+public class Customer {
     private int id;
 	private String name;
 	private String address;
-	public Person() {}
-	public Person(String name, String address) {		
+	public Customer() {}
+	public Customer(String name, String address) {
 		this.name=name;
 		this.address=address;
 	}
