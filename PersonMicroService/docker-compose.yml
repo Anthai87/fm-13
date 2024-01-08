@@ -2,7 +2,7 @@ version: "3"
 services:
  demo:
   build: .
-  image: demo
-  container_name: demo
+  image: CustomerService
+  container_name: CustomerService
   ports:
   - "8080:8080"
