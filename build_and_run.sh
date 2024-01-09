@@ -4,7 +4,8 @@
 cd CustomerMicroService
 ./build.sh 
 cd ..
-PaymentService
+
+#PaymentService
 cd PaymentMicroService
 ./build.sh 
 cd ..
