@@ -1,4 +1,4 @@
-package dtu.RedGreenRefactor.main.model;
+package dtu.fm13.CustomerServiceTests;
 
 import static io.restassured.RestAssured.given;
 
