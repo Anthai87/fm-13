@@ -6,10 +6,10 @@
 	<!-- Tip to update to the latest releases: Run "mvn versions:use-latest-releases" -->
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>dtu</groupId>
-	<artifactId>CucumberExample</artifactId>
-	<name>ClientRedGreenRefactor</name>
-	<version>SNAPSHOT 0.0.1</version>
+	<groupId>org</groupId>
+	<artifactId>fm-13</artifactId>
+	<name>SystemTests</name>
+	<version>1.0.1-SNAPSHOT</version>
 
 	<properties>
 		<!-- Set the Java version used by the compiler. -->
