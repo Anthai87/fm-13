@@ -1,0 +1,15 @@
+version: "3"
+services:
+ customerservice:
+  build: CustomerMicroService/.
+  image: customermicroservice
+  container_name: customermicroservice
+  ports:
+  - "8080:8080"
+ paymentservice:
+  build: PaymentMicroService/.
+  image: paymentmicroservice
+  container_name: paymentmicroservice
+  ports:
+  - "8081:8081"
+  
