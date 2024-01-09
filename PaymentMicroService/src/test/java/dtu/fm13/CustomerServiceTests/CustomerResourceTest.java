@@ -1,4 +1,4 @@
-package dtu.RedGreenRefactor.main.model;
+package dtu.fm13.CustomerServiceTests;
 
 import static io.restassured.RestAssured.given;
 
@@ -11,7 +11,7 @@ class CustomerResourceTest {
     @Test
     void testPersonEndpoint() {
         given()
-          .when().get("/customer")
+          .when().get("/customers")
           .then()
              .statusCode(200);
     }

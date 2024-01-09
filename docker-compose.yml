@@ -3,13 +3,30 @@ services:
  customerservice:
   build: CustomerMicroService/.
   image: customermicroservice
-  container_name: customermicroservice
-  ports:
-  - "8080:8080"
+  container_name: "customer"
+  restart: "always"
+  expose:
+  - "8080"
+ 
  paymentservice:
   build: PaymentMicroService/.
   image: paymentmicroservice
-  container_name: paymentmicroservice
-  ports:
-  - "8081:8081"
+  container_name: "payment"
+  restart: "always"
+  expose:
+  - "8080"
   
+  
+
+ nginx:
+  build:
+   context: .
+   dockerfile: dockerfile.nginx
+  container_name: "nginx"
+  restart: "always"
+  links:
+   - customerservice
+   - paymentservice
+  ports:
+  - "8000:8000"
+

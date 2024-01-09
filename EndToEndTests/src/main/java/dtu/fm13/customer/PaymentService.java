@@ -26,18 +26,18 @@ public class PaymentService {
 
 	public PaymentService() {
 	Client client = ClientBuilder.newClient();
-	this.webTarget = client.target("http://localhost:8080");
+	this.webTarget = client.target("http://localhost:8000");
 	}
 	
 	public int postPayment(Payment payment, Customer merchant) {
-		WebTarget personWebTarget = webTarget.path("/payment");
+		WebTarget personWebTarget = webTarget.path("/payments");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.post(Entity.entity(payment, MediaType.APPLICATION_JSON));
 		return response.getStatus();
 	}
 
 	public List<Payment> getList(Customer merchant) {
-		WebTarget paymentWebTarget = webTarget.path("/payment");
+		WebTarget paymentWebTarget = webTarget.path("/payments");
 		Invocation.Builder invocationBuilder = paymentWebTarget.request();
 		Response response = invocationBuilder.get();
 		List<Payment> paymentList = response.readEntity(new GenericType<List<Payment>>() {});

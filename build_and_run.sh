@@ -10,7 +10,8 @@ cd PaymentMicroService
 ./build.sh 
 cd ..
 
-docker-compose up -d
+docker compose -f docker-compose.yml up -d --build --force-recreate 
+
 cd EndToEndTests
 mvn test
 

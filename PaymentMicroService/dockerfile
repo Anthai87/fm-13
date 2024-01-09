@@ -1,5 +1,6 @@
 FROM openjdk:17-jdk-slim
 WORKDIR /usr/src
+EXPOSE 8080
 COPY target/quarkus-app /usr/src/quarkus-app
 CMD java -Xmx64m \
 -jar quarkus-app/quarkus-run.jar

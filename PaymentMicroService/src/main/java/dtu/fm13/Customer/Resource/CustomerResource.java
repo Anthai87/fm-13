@@ -19,10 +19,11 @@ public class CustomerResource {
         Customer p1 = new Customer("John", "Doe");
         p1.setId(1);
         customers.add(p1);
-        Customer p2 = new Customer("Alice", "Andersson");
+        Customer p2 = new Customer("Alice2", "Andersson2");
         p2.setId(2);
         customers.add(p2);
-
+        Payment payment = new Payment(1,2,11);
+        payments.add(payment);
     }
 
     public void setCustomers(List<Customer> customers) {

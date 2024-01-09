@@ -25,11 +25,11 @@ public class CustomerService {
 
 	public CustomerService() {
 	Client client = ClientBuilder.newClient();
-	this.webTarget = client.target("http://localhost:8080");
+	this.webTarget = client.target("http://localhost:8000");
 	}
 	
 	public List<Customer> getPerson() {
-		WebTarget personWebTarget = webTarget.path("/customer");
+		WebTarget personWebTarget = webTarget.path("/customers");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.get();
 		List<Customer> personList = response.readEntity(new GenericType<List<Customer>>() {});
@@ -38,7 +38,7 @@ public class CustomerService {
 	}
 
 	public int add(Customer customer) {
-		WebTarget personWebTarget = webTarget.path("/customer");
+		WebTarget personWebTarget = webTarget.path("/customers");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.post(Entity.entity(customer, MediaType.APPLICATION_JSON));
 		return response.getStatus();
