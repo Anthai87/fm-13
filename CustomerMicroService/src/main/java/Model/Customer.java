@@ -1,35 +1,55 @@
 package Model;
 
 public class Customer {
-    private int id;
-	private String name;
-	private String address;
-	public Customer() {}
+	private String id;
+
+	private String cpr;
+	private String firstName;
+	private String lastName;
+
+	public Customer() {
+	}
+
 	public Customer(String name, String address) {
-		this.name=name;
-		this.address=address;
+		this.firstName = name;
+		this.lastName = address;
 	}
-	public String getAddress() {
-		return address;
+
+	public String getLastName() {
+		return lastName;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+
+	public void setLastName(String address) {
+		this.lastName = address;
 	}
-	public String getName() {
-		return name;
+
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setFirstName(String name) {
+		this.firstName = name;
 	}
-	public int getId() {
+
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+
+	public void setId(String id) {
 		this.id = id;
 	}
+
 	@Override
 	public String toString() {
-		return this.name + " " +  this.address;
+		return this.firstName + " " + this.lastName;
 	}
-	
+
+	public String getCpr() {
+		return cpr;
+	}
+
+	public void setCpr(String cpr) {
+		this.cpr = cpr;
+	}
+
 }
