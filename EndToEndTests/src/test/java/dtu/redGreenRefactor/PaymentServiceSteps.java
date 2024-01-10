@@ -175,8 +175,8 @@ public class PaymentServiceSteps {
 	
 	}
 
-//	@Then("the balance of the customer at the bank is {int} kr")
-//	public void theBalanceOfTheCustomerAtTheBankIsKr(Integer int1) {
+	@Then("the balance of the customer at the bank is {int} kr")
+	public void theBalanceOfTheCustomerAtTheBankIsKr(Integer int1) {
 //		BigDecimal balance= new BigDecimal(-1);
 //		try {
 //			balance = bankService.getAccount(customerBankID).getBalance();
@@ -185,10 +185,10 @@ public class PaymentServiceSteps {
 //			e.printStackTrace();
 //		}
 //		assertEquals(int1,balance);
-//	}
+	}
 
-//	@Then("the balance of the merchant at the bank is {int} kr")
-//	public void theBalanceOfTheMerchantAtTheBankIsKr(Integer int1) {
+	@Then("the balance of the merchant at the bank is {int} kr")
+	public void theBalanceOfTheMerchantAtTheBankIsKr(Integer int1) {
 //		BigDecimal balance= new BigDecimal(-1);
 //		try {
 //			balance = bankService.getAccount(merchantBankID).getBalance();
@@ -197,6 +197,6 @@ public class PaymentServiceSteps {
 //			e.printStackTrace();
 //		}
 //		assertEquals(int1,balance);
-//	}
+	}
 
 }
