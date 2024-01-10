@@ -52,7 +52,7 @@ public class PaymentServiceSteps {
 	@When("the merchant initiates a payment for {float} kr by the customer")
 	public void theMerchantInitiatesAPaymentForKrByTheCustomer(Float amount) {
 		payment = new Payment(customer.getId(), merchant.getId(), amount);
-		returncode = paymentService.postPayment(payment, merchant);
+		returncode = paymentService.pay(payment, merchant);
 	}
 
 	// Harald
@@ -88,9 +88,9 @@ public class PaymentServiceSteps {
 	@Given("a customer with a bank account with balance {int}")
 	public void aCustomerWithABankAccountWithBalance(Integer int1) {
 		User user = new User();
-		user.setCprNumber("1234567891");
+		user.setCprNumber("13567891");
 		user.setFirstName("Harald");
-		user.setLastName("testLastname");
+		user.setLastName("Lastname");
 		customer = new Customer();
 		customer.setFirstName(user.getFirstName());
 		customer.setCpr(user.getCprNumber());
@@ -151,7 +151,7 @@ public class PaymentServiceSteps {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals(balance,int1);
+		assertEquals(int1,balance);
 	}
 
 	@Then("the balance of the merchant at the bank is {int} kr")

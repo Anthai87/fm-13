@@ -1,11 +1,8 @@
 
 package dtu.fm13.customer;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
+
 import java.util.List;
-import java.util.Set;
 
 import dtu.fm13.customer.model.Customer;
 import dtu.fm13.customer.model.Payment;
@@ -29,7 +26,7 @@ public class PaymentService {
 	this.webTarget = client.target("http://localhost:8000");
 	}
 	
-	public int postPayment(Payment payment, Customer merchant) {
+	public int pay(Payment payment, Customer merchant) {
 		WebTarget personWebTarget = webTarget.path("/payments");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.post(Entity.entity(payment, MediaType.APPLICATION_JSON));
