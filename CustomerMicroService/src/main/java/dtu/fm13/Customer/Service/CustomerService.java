@@ -38,10 +38,11 @@ public class CustomerService {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public UUID createCustomer(UUID customerID) {
+    public UUID createCustomer(String accountID) {
     	Customer customer = new Customer();
-    	customer.setId(customerID);
-    	
+    	//customer.setId(customerID);
+    	customer.setAccountID(accountID);
+    	System.out.println(accountID);
     	customerResource.addCustomer(customer);
         return customer.getId();
     }

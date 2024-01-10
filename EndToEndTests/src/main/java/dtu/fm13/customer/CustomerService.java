@@ -38,10 +38,10 @@ public class CustomerService {
 		return personList;
 	}
 
-	public Response create(UUID customerID) {
+	public Response create(String bankAccountID) {
 		WebTarget personWebTarget = webTarget.path("/customers");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
-		Response response = invocationBuilder.post(Entity.entity(customerID, MediaType.APPLICATION_JSON));
+		Response response = invocationBuilder.post(Entity.entity(bankAccountID, MediaType.APPLICATION_JSON));
 		return response;
 	}
 }

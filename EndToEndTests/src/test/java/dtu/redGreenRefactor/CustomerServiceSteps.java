@@ -12,6 +12,7 @@ import dtu.fm13.customer.model.Customer;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.Response;
 
 public class CustomerServiceSteps {
@@ -19,7 +20,7 @@ public class CustomerServiceSteps {
 	Customer customer;
 	CustomerService customerService = new CustomerService();
 	private List<Customer> customers = new ArrayList<Customer>();
-	private Response responseCode;
+	private Response response;
 
 	@When("I call the personService to get person via Json")
 	public void iCallTheHelloServiceToGetPersonViaJson() {
@@ -46,22 +47,18 @@ public class CustomerServiceSteps {
 	}
 	@When("the customer is registered with DTU Pay")
 	public void thePersonIsRegisteredWithDTUPay() {
-		
-	    responseCode =customerService.create(customer.getId());
+		String bankID="børge";
+	    response =customerService.create(bankID);
+	    customer.setId( response.readEntity(new GenericType<UUID>() {}));
+	    
 	    
 	}
 
 	@Then("the customer is registered")
 	public void thePersonIsRegistered() {
 		customers = customerService.getPerson();
-		assertEquals(200,responseCode.getStatus());
-		
-	    System.out.println("custid: "+ customer.getId());
-	    for (Customer c: customers) {
-		    System.out.println("custid: "+ c.getId());
-
-	    }
-	    assertTrue(customers.contains(customer));
+		assertEquals(200,response.getStatus());
+		assertTrue(customers.contains(customer));
 	}
 
 }

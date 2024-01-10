@@ -4,6 +4,7 @@ import java.util.UUID;
 
 public class Customer {
 	private UUID id;
+	private String accountID;
 
 	private String cpr;
 	private String firstName;
@@ -55,6 +56,14 @@ public class Customer {
 
 	public void setCpr(String cpr) {
 		this.cpr = cpr;
+	}
+
+	public String getAccountID() {
+		return accountID;
+	}
+
+	public void setAccountID(String accountID) {
+		this.accountID = accountID;
 	}
 
 }
