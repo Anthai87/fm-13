@@ -18,8 +18,11 @@ public class CustomerResource {
 
     public CustomerResource() {
         Customer p1 = new Customer("John", "Doe");
+        p1.setId(UUID.randomUUID());
         customers.add(p1);
+        
         Customer p2 = new Customer("Alice", "Andersson");
+        p2.setId(UUID.randomUUID());
         customers.add(p2);
 
     }

@@ -16,6 +16,8 @@ public class Customer {
 	public Customer(String name, String address) {
 		this.firstName = name;
 		this.lastName = address;
+		id = UUID.randomUUID();
+
 	}
 
 	public String getLastName() {
