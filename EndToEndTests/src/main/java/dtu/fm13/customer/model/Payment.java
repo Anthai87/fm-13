@@ -6,11 +6,11 @@ import java.util.UUID;
 public class Payment {
 	private UUID payerId;
 	private UUID recieverId;
-	private float amount;
+	private int amount;
 	public Payment() {
 		
 	}
-	public Payment(UUID payerId,UUID recieverId,float amount) {
+	public Payment(UUID payerId,UUID recieverId,int amount) {
 		this.payerId=payerId;
 		this.recieverId=recieverId;
 		this.amount=amount;
@@ -36,7 +36,7 @@ public class Payment {
 		this.recieverId = recieverId;
 	}
 
-	public void setAmount(float amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 	

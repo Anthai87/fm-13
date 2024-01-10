@@ -39,6 +39,7 @@ public class PaymentServiceSteps {
 		customer = new Customer("customer", "name");
 
 		customer.setId(UUID.fromString(id));
+		customerService.create(customer.getId());
 	}
 
 	// Harald
@@ -47,14 +48,16 @@ public class PaymentServiceSteps {
 		merchant = new Customer("merchant", "name");
 
 		merchant.setId(UUID.fromString(id));
+		customerService.create(merchant.getId());
+		
 
 	}
 
 	// Harald
-	@When("the merchant initiates a payment for {float} kr by the customer")
-	public void theMerchantInitiatesAPaymentForKrByTheCustomer(Float amount) {
+	@When("the merchant initiates a payment for {int} kr by the customer")
+	public void theMerchantInitiatesAPaymentForKrByTheCustomer(Integer amount) {
 		payment = new Payment(customer.getId(), merchant.getId(), amount);
-		returncode = paymentService.postPayment(payment, merchant);
+		returncode = paymentService.postPayment(payment);
 	}
 
 	// Harald
@@ -64,8 +67,8 @@ public class PaymentServiceSteps {
 	}
 
 	// Harald
-	@Given("a successful payment of {float} kr from customer {string} to merchant {string}")
-	public void aSuccessfulPaymentOfKrFromCustomerToMerchant(float amount, String cust, String mer) {
+	@Given("a successful payment of {int} kr from customer {string} to merchant {string}")
+	public void aSuccessfulPaymentOfKrFromCustomerToMerchant(Integer amount, String cust, String mer) {
 		aCustomerWithId(cust);
 		aMerchantWithId(mer);
 		theMerchantInitiatesAPaymentForKrByTheCustomer(amount);
@@ -79,8 +82,8 @@ public class PaymentServiceSteps {
 	}
 
 	// Harald
-	@Then("the list contains a payments where customer {string} paid {float} kr to merchant {string}")
-	public void theListContainsAPaymentsWhereCustomerPaidKrToMerchant(String cust, float amount, String mer) {
+	@Then("the list contains a payments where customer {string} paid {int} kr to merchant {string}")
+	public void theListContainsAPaymentsWhereCustomerPaidKrToMerchant(String cust, Integer amount, String mer) {
 		
 		payment.setPayerId(UUID.fromString(cust));
 		payment.setAmount(amount);

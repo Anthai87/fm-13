@@ -29,7 +29,7 @@ public class PaymentService {
 	this.webTarget = client.target("http://localhost:8000");
 	}
 	
-	public int postPayment(Payment payment, Customer merchant) {
+	public int postPayment(Payment payment) {
 		WebTarget personWebTarget = webTarget.path("/payments");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.post(Entity.entity(payment, MediaType.APPLICATION_JSON));

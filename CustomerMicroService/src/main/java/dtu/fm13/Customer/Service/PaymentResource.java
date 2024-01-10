@@ -30,12 +30,12 @@ public class PaymentResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postPayment(Payment payment) {
-
-        if (customerResource.existsCustomer(payment.getPayerId()) && customerResource.existsCustomer(payment.getRecieverId())) {
+    	
+//        if (customerResource.existsCustomer(payment.getPayerId()) && customerResource.existsCustomer(payment.getRecieverId())) {
             customerResource.addPayment(payment);
             return Response.status(Response.Status.CREATED).build();
-        }
-        return Response.status(Response.Status.BAD_REQUEST).build();
+//        }
+//        return Response.status(Response.Status.BAD_REQUEST).build();
 
     }
 }
