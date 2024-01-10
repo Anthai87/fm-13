@@ -10,8 +10,9 @@ import dtu.ws.fastmoney.User;
 
 public class UserHelper {
 	User customer = new User();
-	User merchant = new User();	
+	User merchant = new User();
 	private final BankService bankService = new BankServiceService().getBankServicePort();
+
 	public UserHelper() {
 		this.customer.setCprNumber("1234567890");
 		this.customer.setFirstName("Dummy");
@@ -20,7 +21,7 @@ public class UserHelper {
 		this.merchant.setFirstName("mDummy");
 		this.merchant.setLastName("mdata");
 	}
-	
+
 	public User getCustomer() {
 		return customer;
 	}
@@ -37,33 +38,31 @@ public class UserHelper {
 		this.merchant = merchant;
 	}
 
+	public String createBankAccount(User user, int amount) {
+		String bankID = null;
+
+		try {
+			bankID = bankService.createAccountWithBalance(user, new BigDecimal(amount));
+		} catch (BankServiceException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bankID;
+	}
+
 	public String getBankID(User user) {
 		String bankID = null;
 		for (AccountInfo account : bankService.getAccounts()) {
 			if (account.getUser().getCprNumber().equals(user.getCprNumber())) {
-			
+
 				bankID = account.getAccountId();
 			}
 		}
-		
-		if (bankID==null) {
-			try {
-				 bankID =bankService.createAccountWithBalance(user, new BigDecimal(1));
-			} catch (BankServiceException_Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+		if (bankID == null) {
+			createBankAccount(user,1);
 		}
 		return bankID;
 	}
-//	public void createNewCustomer(User user) {
-//		this.customer = user;
-//	}
-	
-	
-	
-	
-	//create user
-	//get bank id
-	//register with bank
+
 }
