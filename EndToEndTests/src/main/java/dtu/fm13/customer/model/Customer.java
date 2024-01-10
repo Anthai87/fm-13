@@ -1,9 +1,10 @@
 package dtu.fm13.customer.model;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class Customer {
-    private String id;
+    private UUID id;
     
 	private String cpr;
 	private String firstName;
@@ -32,15 +33,12 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(id,customer.id) &&
-                Objects.equals(firstName, customer.firstName) &&
-                Objects.equals(lastName, customer.lastName)
-                ;
+        return Objects.equals(id,customer.id);
     }
 	
 	@Override
     public int hashCode() {
-        return Objects.hash(id,cpr, firstName,lastName);
+        return Objects.hash(id);
     }
 
 
@@ -51,11 +49,11 @@ public class Customer {
 	public void setCpr(String cpr) {
 		this.cpr = cpr;
 	}
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

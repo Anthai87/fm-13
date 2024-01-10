@@ -2,6 +2,7 @@ package dtu.fm13.Customer.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import Model.Customer;
 import dtu.fm13.Customer.Payment;
@@ -17,10 +18,8 @@ public class CustomerResource {
 
     public CustomerResource() {
         Customer p1 = new Customer("John", "Doe");
-        p1.setId("1");
         customers.add(p1);
         Customer p2 = new Customer("Alice", "Andersson");
-        p2.setId("2");
         customers.add(p2);
 
     }
@@ -41,7 +40,7 @@ public class CustomerResource {
         customers.add(customer);
     }
 
-    public boolean existsCustomer(String id) {
+    public boolean existsCustomer(UUID id) {
         for (Customer customer : getCustomers()) {
             if (customer.getId().equals(id)) {
                 return true;

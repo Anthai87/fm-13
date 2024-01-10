@@ -11,6 +11,7 @@
 package dtu.fm13.Customer.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 import Model.Customer;
 import dtu.fm13.Customer.Resource.CustomerResource;
@@ -37,8 +38,12 @@ public class CustomerService {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public void createCustomer(Customer customer) {
-        customerResource.addCustomer(customer);
+    public UUID createCustomer(UUID customerID) {
+    	Customer customer = new Customer();
+    	customer.setId(customerID);
+    	
+    	customerResource.addCustomer(customer);
+        return customer.getId();
     }
 
     @DELETE

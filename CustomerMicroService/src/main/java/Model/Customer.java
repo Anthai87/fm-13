@@ -1,13 +1,16 @@
 package Model;
 
+import java.util.UUID;
+
 public class Customer {
-	private String id;
+	private UUID id;
 
 	private String cpr;
 	private String firstName;
 	private String lastName;
 
 	public Customer() {
+		id = UUID.randomUUID();
 	}
 
 	public Customer(String name, String address) {
@@ -31,11 +34,11 @@ public class Customer {
 		this.firstName = name;
 	}
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

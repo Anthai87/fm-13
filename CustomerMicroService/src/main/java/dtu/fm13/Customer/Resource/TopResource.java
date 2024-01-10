@@ -16,7 +16,7 @@ public class TopResource {
    
     @Path("customers")
     public CustomerService getCustomerService() {
-      	return new CustomerService(customerResource);
+    	return new CustomerService(customerResource);
         
     }
 

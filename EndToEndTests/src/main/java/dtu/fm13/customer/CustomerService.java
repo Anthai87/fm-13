@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import dtu.fm13.customer.model.Customer;
 import jakarta.ws.rs.client.Client;
@@ -37,10 +38,10 @@ public class CustomerService {
 		return personList;
 	}
 
-	public int add(Customer customer) {
+	public Response create(UUID customerID) {
 		WebTarget personWebTarget = webTarget.path("/customers");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
-		Response response = invocationBuilder.post(Entity.entity(customer, MediaType.APPLICATION_JSON));
-		return response.getStatus();
+		Response response = invocationBuilder.post(Entity.entity(customerID, MediaType.APPLICATION_JSON));
+		return response;
 	}
 }
