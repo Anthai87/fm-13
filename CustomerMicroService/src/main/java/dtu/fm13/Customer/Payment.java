@@ -3,37 +3,37 @@ package dtu.fm13.Customer;
 
 public class Payment {
 
-    private String payerId;
+    private int payerId;
     
-	private String recieverId;
+	private int recieverId;
     private float amount;
 
     public Payment() {
     }
 
-    public Payment(String payerId, String recieverId, float amount) {
+    public Payment(int payerId, int recieverId, float amount) {
         this.payerId = payerId;
         this.recieverId = recieverId;
         this.amount = amount;
     }
 
    
-    public String getPayerId() {
+    public int getPayerId() {
         return payerId;
     }
 
-    public String getRecieverId() {
+    public int getRecieverId() {
         return recieverId;
     }
 
     public float getAmount() {
         return amount;
     }
-    public void setPayerId(String payerId) {
+    public void setPayerId(int payerId) {
 		this.payerId = payerId;
 	}
 
-	public void setRecieverId(String recieverId) {
+	public void setRecieverId(int recieverId) {
 		this.recieverId = recieverId;
 	}
 

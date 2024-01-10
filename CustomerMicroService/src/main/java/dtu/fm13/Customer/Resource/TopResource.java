@@ -20,20 +20,20 @@ public class TopResource {
         
     }
 
-    @Path("payments")
+    @Path("payment")
     public PaymentResource getPaymentResource() {
       return new PaymentResource(customerResource);
       }
-//    @Path("payment2")
-//    public PaymentResource getPaymentResource2() {
-//    	Client client = ClientBuilder.newClient();
-//    	WebTarget webTarget;
-//    	webTarget = client.target("http://paymentservice:8080");
-//    	WebTarget personWebTarget = webTarget.path("/payment");
-//		Invocation.Builder invocationBuilder = personWebTarget.request();
-//		Response response = invocationBuilder.get();
-//		PaymentResource paymenResource = response.readEntity(new GenericType<PaymentResource>() {});
-//		return paymenResource;
-//      //return new PaymentResource(customerResource);
-//      }
+    @Path("payment2")
+    public PaymentResource getPaymentResource2() {
+    	Client client = ClientBuilder.newClient();
+    	WebTarget webTarget;
+    	webTarget = client.target("http://paymentservice:8080");
+    	WebTarget personWebTarget = webTarget.path("/payment");
+		Invocation.Builder invocationBuilder = personWebTarget.request();
+		Response response = invocationBuilder.get();
+		PaymentResource paymenResource = response.readEntity(new GenericType<PaymentResource>() {});
+		return paymenResource;
+      //return new PaymentResource(customerResource);
+      }
 }

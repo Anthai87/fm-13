@@ -3,60 +3,45 @@ package dtu.fm13.customer.model;
 import java.util.Objects;
 
 public class Customer {
-    private String id;
-    
-	private String cpr;
-	private String firstName;
-	private String lastName;
+    private int id;
+	private String name;
+	private String address;
 	public Customer() {}
 	
 	public Customer(String name, String address) {	
-		this.firstName = name;
-		this.lastName=address;
+		this.name = name;
+		this.address=address;
 	}
-	public String getLastName() {
-		return lastName;
+	public String getAddress() {
+		return address;
 	}
-	public void setLastName(String address) {
-		this.lastName = address;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
-	public void setFirstName(String name) {
-		this.firstName = name;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(id,customer.id) &&
-                Objects.equals(firstName, customer.firstName) &&
-                Objects.equals(lastName, customer.lastName)
-                ;
+        return id == customer.id &&
+                Objects.equals(name, customer.name) &&
+                Objects.equals(address, customer.address);
     }
 	
 	@Override
     public int hashCode() {
-        return Objects.hash(id,cpr, firstName,lastName);
+        return Objects.hash(id, name,address);
     }
-
-
-	public String getCpr() {
-		return cpr;
-	}
-
-	public void setCpr(String cpr) {
-		this.cpr = cpr;
-	}
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
 }

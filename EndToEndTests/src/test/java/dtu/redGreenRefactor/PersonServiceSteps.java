@@ -12,7 +12,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class CustomerServiceSteps {
+public class PersonServiceSteps {
 
 	Customer customer;
 	CustomerService customerService = new CustomerService();
@@ -25,21 +25,18 @@ public class CustomerServiceSteps {
 	}
 
 	@Then("I get a customer with name {string} and address {string}")
-	public void iGetAPersonWithNameAndAddress(String firstName, String lastName) {
+	public void iGetAPersonWithNameAndAddress(String name, String address) {
 		// Write code here that turns the phrase above into concrete actions
-		customer = new Customer(firstName, lastName);
-		customer.setCpr("cpr");
-		customer.setId("4");
-		customers.contains(customer);
+		customer = new Customer(name, address);
+		assertEquals(customers.get(0).getName(),name);
+		assertEquals(customers.get(0).getAddress(),address);
 		
 		
 	}
 	@Given("a customer with name {string} and andress {string}")
 	public void aPersonWithNameAndAndress(String name, String address) {
 	    customer = new Customer(name, address);
-	    customer.setId("4");
-	    customer.setCpr("cpr");
-	    customers.add(customer);
+	    customer.setId(4);
 	}
 	@When("the customer is registered with DTU Pay")
 	public void thePersonIsRegisteredWithDTUPay() {
@@ -50,8 +47,7 @@ public class CustomerServiceSteps {
 	@Then("the customer is registered")
 	public void thePersonIsRegistered() {
 		customers = customerService.getPerson();
-		assertEquals(204,responseCode);
-	    
+	    assertEquals(204,responseCode);
 	    assertTrue(customers.contains(customer));
 	}
 
