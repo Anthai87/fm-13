@@ -17,10 +17,10 @@ public class CustomerResource {
 
     public CustomerResource() {
         Customer p1 = new Customer("John", "Doe");
-        p1.setId(1);
+        p1.setId("1");
         customers.add(p1);
         Customer p2 = new Customer("Alice", "Andersson");
-        p2.setId(2);
+        p2.setId("2");
         customers.add(p2);
 
     }
@@ -41,9 +41,9 @@ public class CustomerResource {
         customers.add(customer);
     }
 
-    public boolean existsCustomer(int id) {
+    public boolean existsCustomer(String id) {
         for (Customer customer : getCustomers()) {
-            if (customer.getId() == id) {
+            if (customer.getId().equals(id)) {
                 return true;
             }
         }
