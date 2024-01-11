@@ -1,20 +1,26 @@
 package dtu.fm13.customer.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Objects;
 import java.util.UUID;
 
+@Data
+@NoArgsConstructor
 public class Customer {
     private UUID dTUPayID;
-    
-	private String cpr;
-	private String firstName;
-	private String lastName;
+    private String cpr;
+    private String firstName;
+    private String lastName;
+
+    public Customer(String name, String address) {
+        this.firstName = name;
+        this.lastName = address;
+    }
+
+	/*
 	public Customer() {}
-	
-	public Customer(String name, String address) {	
-		this.firstName = name;
-		this.lastName=address;
-	}
 	public String getLastName() {
 		return lastName;
 	}
@@ -26,29 +32,29 @@ public class Customer {
 	}
 	public void setFirstName(String name) {
 		this.firstName = name;
-	}
-	
-	@Override
+	}*/
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(dTUPayID,customer.dTUPayID);
+        return Objects.equals(dTUPayID, customer.dTUPayID);
     }
-	
-	@Override
+
+    @Override
     public int hashCode() {
         return Objects.hash(dTUPayID);
     }
 
 
-	public String getCpr() {
+/*	public String getCpr() {
 		return cpr;
 	}
 
 	public void setCpr(String cpr) {
 		this.cpr = cpr;
-	}
+	}*/
 	public UUID getId() {
 		return dTUPayID;
 	}
