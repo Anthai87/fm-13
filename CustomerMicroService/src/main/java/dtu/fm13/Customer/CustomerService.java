@@ -8,13 +8,11 @@
  * Customer/?name={name}
  */
 
-package dtu.fm13.Customer.Service;
+package dtu.fm13.Customer;
 
 import java.util.List;
 import java.util.UUID;
 
-import Model.Customer;
-import dtu.fm13.Customer.Resource.CustomerResource;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;

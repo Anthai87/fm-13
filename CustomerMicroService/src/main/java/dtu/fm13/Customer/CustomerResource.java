@@ -1,11 +1,8 @@
-package dtu.fm13.Customer.Resource;
+package dtu.fm13.Customer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import Model.Customer;
-import dtu.fm13.Customer.Payment;
 
 public class CustomerResource {
 
@@ -54,6 +51,14 @@ public class CustomerResource {
 
     public void addPayment(Payment payment) {
         payments.add(payment);
+    }
+    public String getCustomerBankID(UUID uuid) {
+    	for (Customer cust: customers) {
+    		if (cust.getId().equals(uuid)) {
+    			return cust.getAccountID();
+    		}
+    	}
+    	return null;
     }
 }
 

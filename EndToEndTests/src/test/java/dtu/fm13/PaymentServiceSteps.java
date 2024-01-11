@@ -1,4 +1,4 @@
-package dtu.redGreenRefactor;
+package dtu.fm13;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -71,10 +71,8 @@ public class PaymentServiceSteps {
 	// Harald
 	@When("the merchant initiates a payment for {int} kr by the customer")
 	public void theMerchantInitiatesAPaymentForKrByTheCustomer(Integer amount) {
-		System.out.println(merchant.getId());
-		System.out.println(customer.getId());
-
 		payment = new Payment(customer.getId(), merchant.getId(), amount);
+
 		returncode = paymentService.postPayment(payment);
 	}
 
@@ -156,6 +154,7 @@ public class PaymentServiceSteps {
 		merchant = new Customer();
 		merchantBankID = userHelper.createBankAccount(user, int1);
 		BigDecimal amount = new BigDecimal(0);
+		//Move to server!!!!
 		try {
 			amount = bankService.getAccount(merchantBankID).getBalance();
 		} catch (BankServiceException_Exception e) {
@@ -177,26 +176,26 @@ public class PaymentServiceSteps {
 
 	@Then("the balance of the customer at the bank is {int} kr")
 	public void theBalanceOfTheCustomerAtTheBankIsKr(Integer int1) {
-//		BigDecimal balance= new BigDecimal(-1);
-//		try {
-//			balance = bankService.getAccount(customerBankID).getBalance();
-//		} catch (BankServiceException_Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		assertEquals(int1,balance);
+		BigDecimal balance= new BigDecimal(-1);
+		try {
+			balance = bankService.getAccount(customerBankID).getBalance();
+		} catch (BankServiceException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertEquals(int1,balance.intValue());
 	}
 
 	@Then("the balance of the merchant at the bank is {int} kr")
 	public void theBalanceOfTheMerchantAtTheBankIsKr(Integer int1) {
-//		BigDecimal balance= new BigDecimal(-1);
-//		try {
-//			balance = bankService.getAccount(merchantBankID).getBalance();
-//		} catch (BankServiceException_Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		assertEquals(int1,balance);
+		BigDecimal balance= new BigDecimal(-1);
+		try {
+			balance = bankService.getAccount(merchantBankID).getBalance();
+		} catch (BankServiceException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertEquals(int1,balance);
 	}
 
 }

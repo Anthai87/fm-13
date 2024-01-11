@@ -1,4 +1,4 @@
-package dtu.redGreenRefactor;
+package dtu.fm13;
 
 
 import org.junit.runner.RunWith;

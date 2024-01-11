@@ -1,4 +1,4 @@
-Feature: Person service
+Feature: Customer service
 #Scenarios for pay service
 
 Scenario: person service getPersonJson returns correct answer

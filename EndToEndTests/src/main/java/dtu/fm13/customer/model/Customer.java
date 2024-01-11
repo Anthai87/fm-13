@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Customer {
-    private UUID id;
+    private UUID dTUPayID;
     
 	private String cpr;
 	private String firstName;
@@ -33,12 +33,12 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(id,customer.id);
+        return Objects.equals(dTUPayID,customer.dTUPayID);
     }
 	
 	@Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(dTUPayID);
     }
 
 
@@ -50,11 +50,11 @@ public class Customer {
 		this.cpr = cpr;
 	}
 	public UUID getId() {
-		return id;
+		return dTUPayID;
 	}
 
 	public void setId(UUID id) {
-		this.id = id;
+		this.dTUPayID = id;
 	}
 
 }
