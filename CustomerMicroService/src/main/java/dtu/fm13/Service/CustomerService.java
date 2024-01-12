@@ -51,6 +51,10 @@
          }
  
      }
+
+    public boolean exists(String accountID) {
+        return customerRepository.existsCustomer(UUID.fromString(accountID));
+    }
  
     
  
