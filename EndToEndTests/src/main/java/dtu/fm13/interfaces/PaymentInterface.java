@@ -1,5 +1,5 @@
 
-package dtu.fm13.customer;
+package dtu.fm13.interfaces;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,8 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import dtu.fm13.customer.model.Customer;
-import dtu.fm13.customer.model.Payment;
+import dtu.fm13.models.Customer;
+import dtu.fm13.models.Payment;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -20,11 +20,11 @@ import jakarta.ws.rs.core.Response;
 
 
 
-public class PaymentService {
+public class PaymentInterface {
 	
 	WebTarget webTarget;
 
-	public PaymentService() {
+	public PaymentInterface() {
 	Client client = ClientBuilder.newClient();
 	this.webTarget = client.target("http://localhost:8000");
 	}

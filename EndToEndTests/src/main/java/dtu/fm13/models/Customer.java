@@ -1,4 +1,4 @@
-package dtu.fm13.customer.model;
+package dtu.fm13.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

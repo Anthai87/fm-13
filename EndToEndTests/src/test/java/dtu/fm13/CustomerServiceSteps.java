@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import dtu.fm13.customer.CustomerService;
-import dtu.fm13.customer.model.Customer;
+import dtu.fm13.interfaces.CustomerInterface;
+import dtu.fm13.models.Customer;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -18,7 +18,7 @@ import jakarta.ws.rs.core.Response;
 public class CustomerServiceSteps {
 
 	Customer customer;
-	CustomerService customerService = new CustomerService();
+	CustomerInterface customerService = new CustomerInterface();
 	private List<Customer> customers = new ArrayList<Customer>();
 	private Response response;
 
