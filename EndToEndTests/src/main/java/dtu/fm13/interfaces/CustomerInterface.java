@@ -1,12 +1,7 @@
 package dtu.fm13.interfaces;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
 import dtu.fm13.models.Customer;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;

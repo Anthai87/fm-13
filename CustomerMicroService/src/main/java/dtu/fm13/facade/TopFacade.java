@@ -1,20 +1,21 @@
-package dtu.fm13.Customer;
+package dtu.fm13.facade;
 
+import dtu.fm13.repository.CustomerRepository;
 import jakarta.ws.rs.Path;
 
 @Path("/")
-public class TopResource {
-    CustomerResource customerResource = new CustomerResource();
+public class TopFacade {
+    CustomerRepository customerResource = new CustomerRepository();
    
     @Path("customers")
-    public CustomerService getCustomerService() {
-    	return new CustomerService(customerResource);
+    public CustomerFacade getCustomerService() {
+    	return new CustomerFacade(customerResource);
         
     }
 
     @Path("payments")
-    public PaymentResource getPaymentResource() {
-      return new PaymentResource(customerResource);
+    public PaymentFacade getPaymentResource() {
+      return new PaymentFacade(customerResource);
       }
 //    @Path("payment2")
 //    public PaymentResource getPaymentResource2() {

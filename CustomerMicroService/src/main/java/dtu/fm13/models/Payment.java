@@ -1,4 +1,4 @@
-package dtu.fm13.Customer;
+package dtu.fm13.models;
 
 import java.util.UUID;
 

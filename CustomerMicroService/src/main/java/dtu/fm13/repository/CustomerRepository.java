@@ -1,10 +1,13 @@
-package dtu.fm13.Customer;
+package dtu.fm13.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class CustomerResource {
+import dtu.fm13.models.Customer;
+import dtu.fm13.models.Payment;
+
+public class CustomerRepository {
 
     private List<Payment> payments = new ArrayList<>();
     private List<Customer> customers = new ArrayList<>();
@@ -13,7 +16,7 @@ public class CustomerResource {
         return customers;
     }
 
-    public CustomerResource() {
+    public CustomerRepository() {
         Customer p1 = new Customer("John", "Doe");
         p1.setId(UUID.randomUUID());
         customers.add(p1);

@@ -2,10 +2,12 @@ package dtu.fm13.Customer.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.ws.rs.Path;
 
 import Model.Customer;
 import dtu.fm13.Customer.Payment;
 
+@Path("/Payments")
 public class CustomerResource {
 
     private List<Payment> payments = new ArrayList<>();

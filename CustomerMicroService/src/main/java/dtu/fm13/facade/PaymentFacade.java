@@ -1,5 +1,7 @@
-package dtu.fm13.Customer;
+package dtu.fm13.facade;
 
+import dtu.fm13.models.Payment;
+import dtu.fm13.repository.CustomerRepository;
 import dtu.ws.fastmoney.BankService;
 import dtu.ws.fastmoney.BankServiceException_Exception;
 import dtu.ws.fastmoney.BankServiceService;
@@ -13,12 +15,12 @@ import jakarta.ws.rs.core.Response;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class PaymentResource {
+public class PaymentFacade {
 
-	private CustomerResource customerResource;
+	private CustomerRepository customerResource;
 	BankService bank = new BankServiceService().getBankServicePort();
 
-	public PaymentResource(CustomerResource customerResource) {
+	public PaymentFacade(CustomerRepository customerResource) {
 		this.customerResource = customerResource;
 	}
 
