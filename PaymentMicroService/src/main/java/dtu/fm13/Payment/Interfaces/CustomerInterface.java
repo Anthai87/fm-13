@@ -1,4 +1,4 @@
-package dtu.fm13.interfaces;
+package dtu.fm13.Payment.Interfaces;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class CustomerInterface {
 	this.webTarget = client.target("http://customers:8080");
 	}
 	
-	public List<Customer> getPerson() {
+	public List<Customer> getList() {
 		WebTarget personWebTarget = webTarget.path("/customers");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.get();

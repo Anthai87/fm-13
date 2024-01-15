@@ -1,6 +1,7 @@
 package dtu.fm13.helpers;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import dtu.ws.fastmoney.AccountInfo;
 import dtu.ws.fastmoney.BankService;
@@ -14,10 +15,10 @@ public class UserHelper {
 	private final BankService bankService = new BankServiceService().getBankServicePort();
 
 	public UserHelper() {
-		this.customer.setCprNumber("1234567890");
+		this.customer.setCprNumber(UUID.randomUUID().toString());
 		this.customer.setFirstName("Dummy");
 		this.customer.setLastName("data");
-		this.merchant.setCprNumber("567890");
+		this.merchant.setCprNumber(UUID.randomUUID().toString());
 		this.merchant.setFirstName("mDummy");
 		this.merchant.setLastName("mdata");
 	}
@@ -42,16 +43,19 @@ public class UserHelper {
 		String bankID = null;
 
 		try {
+
 			bankID = bankService.createAccountWithBalance(user, new BigDecimal(amount));
 		} catch (BankServiceException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
+		
 		return bankID;
 	}
 
 	public String getBankID(User user) {
-		String bankID = null;
+		String bankID = "";
 		for (AccountInfo account : bankService.getAccounts()) {
 			if (account.getUser().getCprNumber().equals(user.getCprNumber())) {
 
@@ -59,8 +63,8 @@ public class UserHelper {
 			}
 		}
 
-		if (bankID == null) {
-			createBankAccount(user,1);
+		if (bankID.isEmpty()) {
+			bankID=createBankAccount(user,1000);
 		}
 		return bankID;
 	}

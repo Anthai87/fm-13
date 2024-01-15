@@ -1,43 +1,44 @@
 package dtu.fm13.Payment.models;
 
+import java.util.UUID;
 
 public class Payment {
 
-    private int payerId;
+    private UUID payerId;
     
-	private int recieverId;
-    private float amount;
+	private UUID recieverId;
+    private int amount;
 
     public Payment() {
     }
 
-    public Payment(int payerId, int recieverId, float amount) {
+    public Payment(UUID payerId, UUID recieverId, int amount) {
         this.payerId = payerId;
         this.recieverId = recieverId;
         this.amount = amount;
     }
 
    
-    public int getPayerId() {
+    public UUID getPayerId() {
         return payerId;
     }
 
-    public int getRecieverId() {
+    public UUID getRecieverId() {
         return recieverId;
     }
 
-    public float getAmount() {
+    public int getAmount() {
         return amount;
     }
-    public void setPayerId(int payerId) {
+    public void setPayerId(UUID payerId) {
 		this.payerId = payerId;
 	}
 
-	public void setRecieverId(int recieverId) {
+	public void setRecieverId(UUID recieverId) {
 		this.recieverId = recieverId;
 	}
 
-	public void setAmount(float amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 

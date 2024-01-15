@@ -5,18 +5,18 @@ import jakarta.ws.rs.Path;
 
 @Path("/")
 public class TopFacade {
-    CustomerRepository customerResource = new CustomerRepository();
+    CustomerRepository customerRepository = new CustomerRepository();
    
     @Path("customers")
     public CustomerFacade getCustomerService() {
-    	return new CustomerFacade(customerResource);
+    	return new CustomerFacade(customerRepository);
         
     }
 
-    @Path("payments")
-    public PaymentFacade getPaymentResource() {
-      return new PaymentFacade(customerResource);
-      }
+    // @Path("payments")
+    // public PaymentFacade getPaymentResource() {
+    //   return new PaymentFacade(customerResource);
+    //   }
 //    @Path("payment2")
 //    public PaymentResource getPaymentResource2() {
 //    	Client client = ClientBuilder.newClient();

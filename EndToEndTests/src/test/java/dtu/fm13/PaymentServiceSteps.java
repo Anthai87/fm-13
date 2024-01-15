@@ -1,5 +1,6 @@
 package dtu.fm13;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -45,11 +46,13 @@ public class PaymentServiceSteps {
 		customer.setId(UUID.fromString(id));
 
 		User user = userHelper.getCustomer();
+
 		String bankID = userHelper.getBankID(user);
+		System.out.println("BankID: " + bankID);
 		Response response = customerService.create(bankID);
+		
 		customer.setId(response.readEntity(new GenericType<UUID>() {
 		}));
-
 	}
 
 	// Harald &Elias
@@ -62,11 +65,10 @@ public class PaymentServiceSteps {
 		merchant.setId(UUID.fromString(id));
 
 		Response response = customerService.create(bankID);
-		merchant.setId(response.readEntity(new GenericType<UUID>() {
-		}));
+		merchant.setId(response.readEntity(new GenericType<UUID>() {}));
 	}
 
-	// Harald
+	// Haraldhttp://fm-00.compute.dtu.dk/rest/accounts
 	@When("the merchant initiates a payment for {int} kr by the customer")
 	public void theMerchantInitiatesAPaymentForKrByTheCustomer(Integer amount) {
 		payment = new Payment(customer.getId(), merchant.getId(), amount);
@@ -94,7 +96,7 @@ public class PaymentServiceSteps {
 		User user2 = userHelper.getCustomer();
 		merchant = new Customer();
 		merchant.setFirstName(mer);
-		bankID = userHelper.getBankID(user2);
+		bankID = userHelper.getBankID(user2);http://fm-00.compute.dtu.dk/rest/accounts
 		response = customerService.create(bankID);
 		merchant.setId(response.readEntity(new GenericType<UUID>() {
 		}));
@@ -122,8 +124,8 @@ public class PaymentServiceSteps {
 	public void aCustomerWithABankAccountWithBalance(Integer int1) {
 		User user = new User();
 		user.setCprNumber(UUID.randomUUID().toString());
-		user.setFirstName("iste");
-		user.setLastName("mNam");
+		user.setFirstName("mister");
+		user.setLastName("bean");
 		customer = new Customer();
 		customerBankID = userHelper.createBankAccount(user, int1);
 		BigDecimal amount = new BigDecimal(0);
@@ -139,8 +141,8 @@ public class PaymentServiceSteps {
 	@Given("that the customer is registered with DTU Pay")
 	public void thatTheCustomerIsRegisteredWithDTUPay() {
 		Response response = customerService.create(customerBankID);
-		customer.setId(response.readEntity(new GenericType<UUID>() {
-		}));
+		customer.setId(response.readEntity(new GenericType<UUID>() {}));
+		assertNotNull(customer.getId());
 	}
 
 	@Given("a merchant with a bank account with balance {int}")
@@ -169,7 +171,8 @@ public class PaymentServiceSteps {
 
 		Response response = customerService.create(merchantBankID);
 		merchant.setId(response.readEntity(new GenericType<UUID>() {}));
-	
+		assertNotNull(merchant.getId());
+
 	}
 
 	@Then("the balance of the customer at the bank is {int} kr")

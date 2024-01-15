@@ -25,18 +25,25 @@ public class PaymentInterface {
 	}
 	
 	public int add(Payment payment) {
-		WebTarget personWebTarget = webTarget.path("/payments2");
+		WebTarget personWebTarget = webTarget.path("/payments");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.post(Entity.entity(payment, MediaType.APPLICATION_JSON));
 		return response.getStatus();
 	}
 
 	public List<Payment> getList(Customer merchant) {
-		WebTarget paymentWebTarget = webTarget.path("/payments2");
+		WebTarget paymentWebTarget = webTarget.path("/payments");
 		Invocation.Builder invocationBuilder = paymentWebTarget.request();
 		Response response = invocationBuilder.get();
 		List<Payment> paymentList = response.readEntity(new GenericType<List<Payment>>() {});
 		return paymentList;
 		
 	}
+
+    public void addCustomer(Customer customer) {
+		System.out.println("Sending to payment, Bank ID: " +customer.getAccountID());
+        WebTarget personWebTarget = webTarget.path("/payments/customer");
+		Invocation.Builder invocationBuilder = personWebTarget.request();
+		Response response = invocationBuilder.post(Entity.entity(customer, MediaType.APPLICATION_JSON));
+    }
 }

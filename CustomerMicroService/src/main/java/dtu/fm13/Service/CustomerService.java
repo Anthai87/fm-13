@@ -16,11 +16,12 @@
  import dtu.fm13.models.Customer;
  import dtu.fm13.repository.CustomerRepository;
  import dtu.fm13.Service.CustomerService;
+ import dtu.fm13.interfaces.PaymentInterface;
  public class CustomerService {
  
-     private CustomerRepository customerRepository;
- 
-     public CustomerService(CustomerRepository customerRepository) {
+    private CustomerRepository customerRepository;
+    private PaymentInterface paymentInterface= new PaymentInterface();
+    public CustomerService(CustomerRepository customerRepository) {
          this.customerRepository = customerRepository;
      }
  
@@ -29,12 +30,13 @@
      }
  
      public UUID createCustomer(String accountID) {
-         
+         System.out.println("Create customer, with BankID :" + accountID);
          Customer customer = new Customer();
-         //customer.setId(customerID);
          customer.setAccountID(accountID);
-         System.out.println(accountID);
          customerRepository.addCustomer(customer);
+        //add to PaymentService
+        paymentInterface.addCustomer(customer);
+
          return customer.getId();
      }
  

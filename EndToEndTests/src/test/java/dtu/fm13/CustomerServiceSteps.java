@@ -49,6 +49,7 @@ public class CustomerServiceSteps {
 	public void thePersonIsRegisteredWithDTUPay() {
 		String bankID="børge";
 	    response =customerService.create(bankID);
+		
 	    customer.setId( response.readEntity(new GenericType<UUID>() {}));
 	    
 	    

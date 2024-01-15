@@ -8,22 +8,22 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import dtu.fm13.Payment.Repository.PaymentRepository;
 import dtu.fm13.Payment.Service.PaymentService;
+import dtu.fm13.Payment.models.Customer;
 import dtu.fm13.Payment.models.Payment;
 
-@Path("/payments2")
+@Path("/payments")
 public class PaymentFacade {
 
     private PaymentService paymentService;
     private PaymentRepository paymentRepository;
 
-    public PaymentFacade(PaymentRepository paymentRepository) {
-        this.paymentRepository = paymentRepository;
-        this.paymentService=new PaymentService(paymentRepository);
+    public PaymentFacade() {
+        this.paymentRepository = new PaymentRepository();
+        this.paymentService = new PaymentService(paymentRepository);
     }
 
     @GET
@@ -36,11 +36,23 @@ public class PaymentFacade {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postPayment(Payment payment) {
-      
-		 if ( paymentService.add(payment)){
+        System.out.println("got a payment request1");
+        if (paymentService.add(payment)) {
             return Response.status(Response.Status.CREATED).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
-       
+
+    }
+    @Path("/customer")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addCostumer(Customer customer){
+        if (paymentService.addCustomer(customer)) {
+            System.out.println("CID:" + customer.getId() + ", BankID: " + customer.getAccountID());
+            return Response.status(Response.Status.CREATED).build();
+
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 }
