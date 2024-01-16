@@ -16,13 +16,13 @@ services:
     expose:
       - "8080"
 
-  reportService:
-    build: reportService/.
-    image: reportservice
-    container_name: "report"
-    restart: "always"
-    expose:
-      - "8080"
+  # reportService:
+  #   build: reportService/.
+  #   image: reportservice
+  #   container_name: "report"
+  #   restart: "always"
+  #   expose:
+  #     - "8080"
 
 
 

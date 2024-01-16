@@ -36,7 +36,7 @@ public class PaymentFacade {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postPayment(Payment payment) {
-        System.out.println("got a payment request1");
+        System.out.println("got a payment request, PID:" + payment.getPayerId() +". RID:" + payment.getRecieverId());
         if (paymentService.add(payment)) {
             return Response.status(Response.Status.CREATED).build();
         }

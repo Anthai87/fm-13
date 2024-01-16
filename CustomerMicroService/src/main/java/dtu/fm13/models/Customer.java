@@ -1,69 +1,39 @@
 package dtu.fm13.models;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Objects;
 import java.util.UUID;
 
+@Data
+@NoArgsConstructor
 public class Customer {
 	private UUID id;
-	private String accountID;
+    private String accountID;
+    private String cpr;
+    private String firstName;
+    private String lastName;
 
-	private String cpr;
-	private String firstName;
-	private String lastName;
+    public Customer(String name, String address) {
+        this.firstName = name;
+        this.lastName = address;
+    }
 
-	public Customer() {
-		id = UUID.randomUUID();
-	}
+	
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(id, customer.getId());
+    }
 
-	public Customer(String name, String address) {
-		this.firstName = name;
-		this.lastName = address;
-		id = UUID.randomUUID();
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountID);
+    }
 
-	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String address) {
-		this.lastName = address;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String name) {
-		this.firstName = name;
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-		return this.firstName + " " + this.lastName;
-	}
-
-	public String getCpr() {
-		return cpr;
-	}
-
-	public void setCpr(String cpr) {
-		this.cpr = cpr;
-	}
-
-	public String getAccountID() {
-		return accountID;
-	}
-
-	public void setAccountID(String accountID) {
-		this.accountID = accountID;
-	}
 
 }

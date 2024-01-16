@@ -47,8 +47,11 @@ public class CustomerServiceSteps {
 	}
 	@When("the customer is registered with DTU Pay")
 	public void thePersonIsRegisteredWithDTUPay() {
-		String bankID="børge";
-	    response =customerService.create(bankID);
+		
+		customer = new Customer();
+		customer.setFirstName("Børge");
+		customer.setAccountID("94136db5-52c1-47a4-bebe-09a65803d8cf");
+	    response =customerService.create(customer);
 		
 	    customer.setId( response.readEntity(new GenericType<UUID>() {}));
 	    

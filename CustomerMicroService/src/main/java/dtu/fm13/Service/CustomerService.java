@@ -29,10 +29,10 @@
          return customerRepository.getCustomers();
      }
  
-     public UUID createCustomer(String accountID) {
-         System.out.println("Create customer, with BankID :" + accountID);
+     public UUID createCustomer(Customer cust) {
+         System.out.println("Create customer, with BankID :" + cust.getAccountID());
          Customer customer = new Customer();
-         customer.setAccountID(accountID);
+         customer.setAccountID(cust.getAccountID());
          customerRepository.addCustomer(customer);
         //add to PaymentService
         paymentInterface.addCustomer(customer);

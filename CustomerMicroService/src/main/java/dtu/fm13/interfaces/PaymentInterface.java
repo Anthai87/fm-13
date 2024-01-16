@@ -4,6 +4,7 @@ package dtu.fm13.interfaces;
 import java.util.List;
 import dtu.fm13.models.Customer;
 import dtu.fm13.models.Payment;
+import dtu.fm13.models.PaymentCustomer;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -41,9 +42,12 @@ public class PaymentInterface {
 	}
 
     public void addCustomer(Customer customer) {
-		System.out.println("Sending to payment, Bank ID: " +customer.getAccountID());
+		PaymentCustomer pCustomer = new PaymentCustomer();
+        pCustomer.setAccountID(customer.getAccountID());
+		pCustomer.setId(customer.getId());
+		System.out.println("Sending to payment, Bank ID: " +pCustomer.getAccountID());
         WebTarget personWebTarget = webTarget.path("/payments/customer");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
-		Response response = invocationBuilder.post(Entity.entity(customer, MediaType.APPLICATION_JSON));
+		invocationBuilder.post(Entity.entity(pCustomer, MediaType.APPLICATION_JSON));
     }
 }

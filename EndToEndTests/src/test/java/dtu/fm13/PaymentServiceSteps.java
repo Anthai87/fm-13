@@ -31,41 +31,39 @@ public class PaymentServiceSteps {
 	private int returncode;
 	private List<Payment> payments;
 	private final BankService bankService = new BankServiceService().getBankServicePort();
-	private String returnID;
 	private CustomerInterface customerService = new CustomerInterface();
-	private Response responseCode;;
 	private UserHelper userHelper = new UserHelper();
-	private String customerBankID;
-	private String merchantBankID;
+	
 	
 
 	// Harald & Elias
 	@Given("a customer with id {string}")
 	public void aCustomerWithId(String id) {
-		customer = new Customer("customer", "name");
+		customer = new Customer();
 		customer.setId(UUID.fromString(id));
-
 		User user = userHelper.getCustomer();
-
 		String bankID = userHelper.getBankID(user);
-		System.out.println("BankID: " + bankID);
-		Response response = customerService.create(bankID);
-		
+		customer.setAccountID(bankID);
+		Response response = customerService.create(customer);
 		customer.setId(response.readEntity(new GenericType<UUID>() {
 		}));
+		assertNotNull(customer.getId());
+		assertNotNull(customer.getAccountID());
 	}
 
 	// Harald &Elias
 	@Given("a merchant with id {string}")
 	public void aMerchantWithId(String id) {
-		merchant = new Customer("merchant", "name");
+		merchant = new Customer();
 		User user = userHelper.getMerchant();
 		String bankID = userHelper.getBankID(user);
-
-		merchant.setId(UUID.fromString(id));
-
-		Response response = customerService.create(bankID);
+		merchant.setAccountID(bankID);
+		assertNotNull(merchant.getAccountID());
+		Response response = customerService.create(merchant);
+		System.out.println("setting merchant id");
 		merchant.setId(response.readEntity(new GenericType<UUID>() {}));
+		assertNotNull(merchant.getId());
+
 	}
 
 	// Haraldhttp://fm-00.compute.dtu.dk/rest/accounts
@@ -89,15 +87,17 @@ public class PaymentServiceSteps {
 		customer = new Customer();
 		customer.setFirstName(cust);
 		String bankID = userHelper.getBankID(user);
-		Response response = customerService.create(bankID);
+		customer.setAccountID(bankID);
+		Response response = customerService.create(customer);
 		customer.setId(response.readEntity(new GenericType<UUID>() {
 		}));
 
 		User user2 = userHelper.getCustomer();
 		merchant = new Customer();
 		merchant.setFirstName(mer);
-		bankID = userHelper.getBankID(user2);http://fm-00.compute.dtu.dk/rest/accounts
-		response = customerService.create(bankID);
+		bankID = userHelper.getBankID(user2);
+		merchant.setAccountID(bankID);
+		response = customerService.create(merchant);
 		merchant.setId(response.readEntity(new GenericType<UUID>() {
 		}));
 		payment = new Payment();
@@ -127,10 +127,10 @@ public class PaymentServiceSteps {
 		user.setFirstName("mister");
 		user.setLastName("bean");
 		customer = new Customer();
-		customerBankID = userHelper.createBankAccount(user, int1);
+		customer.setAccountID((userHelper.createBankAccount(user, int1)));
 		BigDecimal amount = new BigDecimal(0);
 		try {
-			amount = bankService.getAccount(customerBankID).getBalance();
+			amount = bankService.getAccount(customer.getAccountID()).getBalance();
 		} catch (BankServiceException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -140,7 +140,7 @@ public class PaymentServiceSteps {
 
 	@Given("that the customer is registered with DTU Pay")
 	public void thatTheCustomerIsRegisteredWithDTUPay() {
-		Response response = customerService.create(customerBankID);
+		Response response = customerService.create(customer);
 		customer.setId(response.readEntity(new GenericType<UUID>() {}));
 		assertNotNull(customer.getId());
 	}
@@ -149,14 +149,14 @@ public class PaymentServiceSteps {
 	public void aMerchantWithABankAccountWithBalance(Integer int1) {
 		User user = new User();
 		user.setCprNumber(UUID.randomUUID().toString());
-		user.setFirstName("iste");
-		user.setLastName("mNam");
+		user.setFirstName("mister");
+		user.setLastName("bean");
 		merchant = new Customer();
-		merchantBankID = userHelper.createBankAccount(user, int1);
+		merchant.setAccountID((userHelper.createBankAccount(user, int1)));
 		BigDecimal amount = new BigDecimal(0);
 		//Move to server!!!!
 		try {
-			amount = bankService.getAccount(merchantBankID).getBalance();
+			amount = bankService.getAccount(merchant.getAccountID()).getBalance();
 		} catch (BankServiceException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -169,7 +169,7 @@ public class PaymentServiceSteps {
 	@Given("that the merchant is registered with DTU Pay")
 	public void thatTheMerchantIsRegisteredWithDTUPay() {
 
-		Response response = customerService.create(merchantBankID);
+		Response response = customerService.create(merchant);
 		merchant.setId(response.readEntity(new GenericType<UUID>() {}));
 		assertNotNull(merchant.getId());
 
@@ -179,7 +179,7 @@ public class PaymentServiceSteps {
 	public void theBalanceOfTheCustomerAtTheBankIsKr(Integer int1) {
 		BigDecimal balance= new BigDecimal(-1);
 		try {
-			balance = bankService.getAccount(customerBankID).getBalance();
+			balance = bankService.getAccount(customer.getAccountID()).getBalance();
 		} catch (BankServiceException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -191,7 +191,7 @@ public class PaymentServiceSteps {
 	public void theBalanceOfTheMerchantAtTheBankIsKr(Integer int1) {
 		BigDecimal balance= new BigDecimal(-1);
 		try {
-			balance = bankService.getAccount(merchantBankID).getBalance();
+			balance = bankService.getAccount(merchant.getAccountID()).getBalance();
 		} catch (BankServiceException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

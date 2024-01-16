@@ -12,21 +12,4 @@ public class TopFacade {
     	return new CustomerFacade(customerRepository);
         
     }
-
-    // @Path("payments")
-    // public PaymentFacade getPaymentResource() {
-    //   return new PaymentFacade(customerResource);
-    //   }
-//    @Path("payment2")
-//    public PaymentResource getPaymentResource2() {
-//    	Client client = ClientBuilder.newClient();
-//    	WebTarget webTarget;
-//    	webTarget = client.target("http://paymentservice:8080");
-//    	WebTarget personWebTarget = webTarget.path("/payment");
-//		Invocation.Builder invocationBuilder = personWebTarget.request();
-//		Response response = invocationBuilder.get();
-//		PaymentResource paymenResource = response.readEntity(new GenericType<PaymentResource>() {});
-//		return paymenResource;
-//      //return new PaymentResource(customerResource);
-//      }
 }

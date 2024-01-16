@@ -33,10 +33,10 @@ public class CustomerInterface {
 		return personList;
 	}
 
-	public Response create(String bankAccountID) {
+	public Response create(Customer customer) {
 		WebTarget personWebTarget = webTarget.path("/customers");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
-		Response response = invocationBuilder.post(Entity.entity(bankAccountID, MediaType.APPLICATION_JSON));
+		Response response = invocationBuilder.post(Entity.entity(customer, MediaType.APPLICATION_JSON));
 		return response;
 	}
 }

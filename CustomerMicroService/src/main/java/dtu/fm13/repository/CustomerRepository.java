@@ -40,6 +40,8 @@ public class CustomerRepository {
     }
 
     public void addCustomer(Customer customer) {
+        //TODO check CPR if exists already
+        customer.setId(UUID.randomUUID());
         customers.add(customer);
     }
 
