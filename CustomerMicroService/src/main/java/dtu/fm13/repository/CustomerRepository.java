@@ -1,3 +1,5 @@
+/*Harald
+ */
 package dtu.fm13.repository;
 
 import java.util.ArrayList;
@@ -17,14 +19,6 @@ public class CustomerRepository {
     }
 
     public CustomerRepository() {
-        Customer p1 = new Customer("John", "Doe");
-        p1.setId(UUID.randomUUID());
-        customers.add(p1);
-        
-        Customer p2 = new Customer("Alice", "Andersson");
-        p2.setId(UUID.randomUUID());
-        customers.add(p2);
-
     }
 
     public void setCustomers(List<Customer> customers) {

@@ -1,3 +1,5 @@
+/*Harald & Anthony
+ */
 package dtu.fm13.models;
 
 import java.util.UUID;

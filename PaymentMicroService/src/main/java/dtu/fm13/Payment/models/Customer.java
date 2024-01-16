@@ -1,3 +1,5 @@
+/*Harald
+ */
 package dtu.fm13.Payment.models;
 
 import java.security.Timestamp;

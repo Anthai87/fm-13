@@ -1,3 +1,5 @@
+/* Anthony & Harald
+ */
 package dtu.fm13.helpers;
 
 import java.math.BigDecimal;

@@ -1,3 +1,5 @@
+/*Harald
+ */
 package dtu.fm13.models;
 
 import lombok.Data;

@@ -1,11 +1,4 @@
-/*Interface for the Customer MicroService
- * implements:
- * Customer 
- * - get
- * - post
- * - delete
- * needs:
- * Customer/?name={name}
+/*Harald
  */
 
 package dtu.fm13.facade;

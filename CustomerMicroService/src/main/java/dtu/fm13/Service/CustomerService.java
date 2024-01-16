@@ -1,11 +1,4 @@
-/*Interface for the Customer MicroService
- * implements:
- * Customer 
- * - get
- * - post
- * - delete
- * needs:
- * Customer/?name={name}
+/*Harald
  */
 
  package dtu.fm13.Service;
@@ -16,7 +9,7 @@
  import dtu.fm13.models.Customer;
  import dtu.fm13.repository.CustomerRepository;
  import dtu.fm13.Service.CustomerService;
- import dtu.fm13.interfaces.PaymentInterface;
+import dtu.fm13.interfaces.PaymentInterface;
  public class CustomerService {
  
     private CustomerRepository customerRepository;
