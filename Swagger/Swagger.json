@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "dtuPay- fm13",
-    "description": "Documentation written by: DTU Pay is a service for easy bank transfers between merchants and their customers. Some of its primary features are; - Anonymity. Private information about merchants and users are never shared. - Security. DTU pays uses RFID to secure payments between merchants and customers - Reporting. Easy access to all transactions from the report service. Initial swagger setup, /Customer and /Payments made by Harald ",
+    "description": "Documentation written by: DTU Pay is a service for easy bank transfers between merchants and their customers. Some of its primary features are; - Anonymity,security and reporting. Private information about merchants and users are never shared. - Security. DTU pays uses RFID to secure payments between merchants and customers - Reporting. Easy access to all transactions from the report service. Initial swagger setup, /Customer and /Payments made by Harald ",
     "contact": {
       "email": "s204436@student.dtu.dk"
       
@@ -10,6 +10,9 @@
     "version": "1.3.0"
   },
   "servers": [
+    {
+      "url": "http://localhost:8000"
+    },
     {
       "url": "http://fm-13.compute.dtu.dk:8000"
     }
