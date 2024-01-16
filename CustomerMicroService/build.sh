@@ -1,3 +1,2 @@
-mvn package
-docker build --tag customerservice .
-
+mvn package clean install
+docker build --tag customerservice . 

@@ -1,2 +1,2 @@
-mvn package
-docker build --tag paymentservice .
+mvn package  clean install 
+docker build--tag paymentservice . 
