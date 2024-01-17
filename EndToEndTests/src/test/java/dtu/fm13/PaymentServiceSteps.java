@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,6 +19,7 @@ import dtu.ws.fastmoney.BankService;
 import dtu.ws.fastmoney.BankServiceException_Exception;
 import dtu.ws.fastmoney.BankServiceService;
 import dtu.ws.fastmoney.User;
+import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -27,6 +29,7 @@ import jakarta.ws.rs.core.Response;
 public class PaymentServiceSteps {
 	private Account customer;
 	private Account merchant;
+	private List<Account> accounts= new ArrayList<Account>();
 	private Payment payment;
 	private PaymentInterface paymentService = new PaymentInterface();
 	private int returncode;
@@ -50,6 +53,7 @@ public class PaymentServiceSteps {
 		Response response = customerService.create(customer);
 		customer.setId(response.readEntity(new GenericType<UUID>() {
 		}));
+		accounts.add(customer);
 		assertNotNull(customer.getId());
 		assertNotNull(customer.getAccountID());
 	}
@@ -66,7 +70,8 @@ public class PaymentServiceSteps {
 		System.out.println("setting merchant id");
 		merchant.setId(response.readEntity(new GenericType<UUID>() {}));
 		assertNotNull(merchant.getId());
-
+		assertNotNull(customer.getAccountID());
+		accounts.add(merchant);
 	}
 
 	// Harald
@@ -109,6 +114,8 @@ public class PaymentServiceSteps {
 		payment.setAmount(amount);
 		theMerchantInitiatesAPaymentForKrByTheCustomer(amount);
 		thePaymentIsSuccessful();
+		accounts.add(customer);
+		accounts.add(merchant);
 	}
 
 	// Anthony
@@ -139,6 +146,7 @@ public class PaymentServiceSteps {
 			e.printStackTrace();
 		}
 		assertEquals(int1, amount.intValue());
+		accounts.add(customer);
 	}
 	//Harald
 	@Given("that the customer is registered with DTU Pay")
@@ -165,6 +173,7 @@ public class PaymentServiceSteps {
 			e.printStackTrace();
 		}
 		assertEquals(int1, amount.intValue());
+		accounts.add(merchant);
 	}
 
 	
@@ -200,6 +209,17 @@ public class PaymentServiceSteps {
 			e.printStackTrace();
 		}
 		assertEquals(int1,balance);
+	}
+
+	@After
+	public void cleanupBank(){
+		for (Account a: accounts){
+			try {
+				bankService.retireAccount(a.getAccountID());
+			} catch (BankServiceException_Exception e) {
+				
+			}
+		}
 	}
 
 }

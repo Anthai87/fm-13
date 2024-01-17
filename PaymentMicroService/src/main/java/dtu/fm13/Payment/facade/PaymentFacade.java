@@ -14,7 +14,7 @@ import java.util.List;
 
 import dtu.fm13.Payment.Repository.PaymentRepository;
 import dtu.fm13.Payment.Service.PaymentService;
-import dtu.fm13.Payment.models.Customer;
+import dtu.fm13.Payment.models.account;
 import dtu.fm13.Payment.models.Payment;
 
 @Path("/payments")
@@ -49,7 +49,7 @@ public class PaymentFacade {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addCostumer(Customer customer){
+    public Response addCostumer(account customer){
         if (paymentService.addCustomer(customer)) {
             System.out.println("CID:" + customer.getId() + ", BankID: " + customer.getAccountID());
             return Response.status(Response.Status.CREATED).build();

@@ -44,10 +44,6 @@ public class CustomerInterface {
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.delete();
 		return response;
-
-		
-
-
 	}
 	
 	//gettokens

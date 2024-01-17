@@ -5,7 +5,7 @@ package dtu.fm13.Payment.models;
 import java.security.Timestamp;
 import java.util.UUID;
 
-public class Customer {
+public class account {
 	private UUID id;
 	private String accountID;
 	private Timestamp deleted;
@@ -19,7 +19,7 @@ public class Customer {
 	}
 
 
-	public Customer() {
+	public account() {
 		id = UUID.randomUUID();
 	}
 

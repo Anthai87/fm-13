@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import dtu.fm13.Payment.Repository.PaymentRepository;
-import dtu.fm13.Payment.models.Customer;
+import dtu.fm13.Payment.models.account;
 import dtu.fm13.Payment.models.Payment;
 import dtu.ws.fastmoney.BankService;
 import dtu.ws.fastmoney.BankServiceException_Exception;
@@ -49,7 +49,7 @@ public class PaymentService {
         return false;
     }
 
-    public boolean addCustomer(Customer customer) {
+    public boolean addCustomer(account customer) {
         return paymentRepository.addCustomer(customer);
     }
 }

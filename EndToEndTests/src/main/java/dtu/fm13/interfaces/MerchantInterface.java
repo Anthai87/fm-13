@@ -23,7 +23,15 @@ public class MerchantInterface {
 	Client client = ClientBuilder.newClient();
 	this.webTarget = client.target("http://localhost:8000");
 	}
-	
+	//For EndToEnd tests, to see if customers are created successfully
+	public List<Account> merchantList() {
+		WebTarget personWebTarget = webTarget.path("/merchants");
+		Invocation.Builder invocationBuilder = personWebTarget.request();
+		Response response = invocationBuilder.get();
+		List<Account> merchantList = response.readEntity(new GenericType<List<Account>>() {});
+
+		return merchantList;
+	}
 	public List<Account> Report(String id) {
 		WebTarget personWebTarget = webTarget.path("/merchants/" +id+ "/report");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
@@ -37,6 +45,12 @@ public class MerchantInterface {
 		WebTarget personWebTarget = webTarget.path("/merchants");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.post(Entity.entity(customer, MediaType.APPLICATION_JSON));
+		return response;
+	}
+	public Response delete(Account merchant) {
+		WebTarget personWebTarget = webTarget.path("/merchants/"+merchant.getId().toString());
+		Invocation.Builder invocationBuilder = personWebTarget.request();
+		Response response = invocationBuilder.delete();
 		return response;
 	}
 }
