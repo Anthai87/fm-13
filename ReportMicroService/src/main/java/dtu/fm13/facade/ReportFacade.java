@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class ReportFacade {
     private ReportRepository reportRepository;
-    //private ReportService reportService;
+    private ReportService reportService;
 
 
     public ReportFacade(ReportRepository reportRepository) {
