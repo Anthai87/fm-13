@@ -16,18 +16,17 @@ import jakarta.ws.rs.core.Response;
 
 
 
-public class CustomerInterface {
-	private List<Customer> customers = new ArrayList<Customer>();
+public class MerchantInterface {
 
 	WebTarget webTarget;
 
-	public CustomerInterface() {
+	public MerchantInterface() {
 	Client client = ClientBuilder.newClient();
 	this.webTarget = client.target("http://localhost:8000");
 	}
-	//For EndToEnd tests, to see if customers are created successfully
-	public List<Customer> customerList() {
-		WebTarget personWebTarget = webTarget.path("/customers");
+	
+	public List<Customer> Report(String id) {
+		WebTarget personWebTarget = webTarget.path("/merchants/" +id+ "/report");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.get();
 		List<Customer> personList = response.readEntity(new GenericType<List<Customer>>() {});
@@ -36,23 +35,9 @@ public class CustomerInterface {
 	}
 
 	public Response create(Customer customer) {
-		WebTarget personWebTarget = webTarget.path("/customers");
+		WebTarget personWebTarget = webTarget.path("/merchants");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.post(Entity.entity(customer, MediaType.APPLICATION_JSON));
 		return response;
 	}
-	public Response delete(Customer customer) {
-		WebTarget personWebTarget = webTarget.path("/customers/"+customer.getId().toString());
-		Invocation.Builder invocationBuilder = personWebTarget.request();
-		Response response = invocationBuilder.delete();
-		return response;
-
-		
-
-
-	}
-	
-	//gettokens
-	//getreports
-
 }

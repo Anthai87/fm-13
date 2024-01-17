@@ -8,8 +8,7 @@ import jakarta.ws.rs.Path;
 @Path("/")
 public class TopFacade {
     CustomerRepository customerRepository = new CustomerRepository();
-   
-    @Path("customers")
+    @Path("customers/")
     public CustomerFacade getCustomerService() {
     	return new CustomerFacade(customerRepository);
         

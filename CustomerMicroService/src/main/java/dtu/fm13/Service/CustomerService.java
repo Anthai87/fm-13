@@ -33,18 +33,19 @@ import dtu.fm13.interfaces.PaymentInterface;
          return customer.getId();
      }
  
-     public void deleteCustomer(Customer customer) {
-         
-         try {
+     public boolean deleteCustomer(String customerID) {
+        try {
+            int listSize = customerRepository.getCustomers().size();
              List<Customer> newlist = customerRepository.getCustomers();
-             newlist.removeIf(p -> p.getId() == customer.getId());
-             customerRepository.setCustomers(newlist);
- 
-         } catch (Exception e) {
-             // TODO Auto-generated catch block
-             e.printStackTrace();
-         }
- 
+             newlist.removeIf(c -> c.getId().equals(UUID.fromString(customerID)));
+            if (listSize == newlist.size()) return false; 
+            customerRepository.setCustomers(newlist);
+            return true;
+        } catch (Exception e) {
+            return false;
+        } 
+            
+         
      }
 
     public boolean exists(String accountID) {
