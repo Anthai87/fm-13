@@ -17,9 +17,10 @@ public class Customer {
     private String firstName;
     private String lastName;
 
-    public Customer(String firstname, String lastname) {
+    public Customer(String firstname, String lastname, String cpr) {
         this.firstName = firstname;
         this.lastName = lastname;
+        this.cpr=cpr;
     }
 
 	
@@ -28,12 +29,12 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(accountID, customer.getAccountID());
+        return Objects.equals(id, customer.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountID);
+        return Objects.hash(id);
     }
 
 

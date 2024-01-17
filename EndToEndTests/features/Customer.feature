@@ -7,12 +7,14 @@ Scenario: person service getPersonJson returns correct answer
 	Then I get a customer with name "John" and address "Doe"
 
 Scenario: add customer to DTU pay
-	Given a customer with name "Jane" and andress "Sin City"
+	Given a customer with first name "Jane", last name "Doe" and crp "1234567890" 
 	When the customer is registered with DTU Pay
 	Then the customer is registered
 
-#Scenario: Updating the person using JSON
-#	When I update the person with name "Carrie V. Herzig" and address "Harrisburg" using JSON
-#	And I call the hello service to get person via Json
-#	Then I get a person with name "Carrie V. Herzig" and address "Harrisburg"
-#
+ Scenario: Delete a customer from DTU-pay
+	Given a customer with first name "Jane", last name "Doe" and crp "1234567890" 
+ 	When the customer is registered with DTU Pay
+	Then the customer is registered
+	When the customer is deleted
+	Then the customer is not registered
+
