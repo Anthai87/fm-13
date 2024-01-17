@@ -3,49 +3,44 @@ package dtu.fm13.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
-import dtu.fm13.models.Customer;
 import dtu.fm13.models.Payment;
 import lombok.Getter;
 import lombok.Setter;
+
+/**
+ * @authors Elias & Anthony
+ */
 
 @Setter
 @Getter
 public class ReportRepository {
 
     private List<Payment> payments = new ArrayList<>();
-   // private List<Customer> customers = new ArrayList<>();
 
     public ReportRepository() {
     }
 
-/*    public void addCustomer(Customer customer) {
-        //TODO check CPR if exists already
-        customer.setId(UUID.randomUUID());
-        customers.add(customer);
-    }*/
-
-//    public boolean existsCustomer(UUID id) {
-//        for (Customer customer : getPayments()) {
-//            if (customer.getId().equals(id)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
     public void addPayment(Payment payment) {
         this.payments.add(payment);
     }
- /*   public String getCustomerBankID(UUID uuid) {
-    	for (Customer cust: payments) {
-    		if (cust.getId().equals(uuid)) {
-    			return cust.getAccountID();
-    		}
-    	}
-    	return null;
-    }*/
+
+
+    public Optional<Payment> getPaymentById(String paymentId) {
+        return payments.stream()
+                .filter(payment -> payment.getPayerId().equals(paymentId))
+                .findFirst();
+    }
+
+
+    public void deletePayment(String paymentId) {
+        Optional<Payment> paymentToDelete = payments.stream().filter(payment ->
+                payment.getPayerId().equals(paymentId)).findFirst();
+        paymentToDelete.ifPresent(payment -> payments.remove(payment));
+    }
+
+
 }
 
 
