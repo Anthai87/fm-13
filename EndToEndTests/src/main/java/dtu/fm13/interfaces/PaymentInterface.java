@@ -3,7 +3,7 @@
 package dtu.fm13.interfaces;
 import java.util.List;
 
-import dtu.fm13.models.Customer;
+import dtu.fm13.models.Account;
 import dtu.fm13.models.Payment;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
@@ -32,7 +32,7 @@ public class PaymentInterface {
 		return response.getStatus();
 	}
 
-	public List<Payment> getList(Customer merchant) {
+	public List<Payment> getList(Account merchant) {
 		WebTarget paymentWebTarget = webTarget.path("/payments");
 		Invocation.Builder invocationBuilder = paymentWebTarget.request();
 		Response response = invocationBuilder.get();

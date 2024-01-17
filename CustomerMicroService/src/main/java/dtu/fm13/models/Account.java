@@ -1,4 +1,4 @@
-/* Anthony
+/*Elias
  */
 package dtu.fm13.models;
 
@@ -10,17 +10,16 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-public class Customer {
+public class Account {
 	private UUID id;
     private String accountID;
     private String cpr;
     private String firstName;
     private String lastName;
 
-    public Customer(String firstname, String lastname, String cpr) {
-        this.firstName = firstname;
-        this.lastName = lastname;
-        this.cpr=cpr;
+    public Account(String name, String address) {
+        this.firstName = name;
+        this.lastName = address;
     }
 
 	
@@ -28,13 +27,13 @@ public class Customer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
+        Account customer = (Account) o;
         return Objects.equals(id, customer.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(accountID);
     }
 
 

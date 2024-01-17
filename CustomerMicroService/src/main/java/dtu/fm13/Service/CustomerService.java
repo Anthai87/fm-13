@@ -6,7 +6,7 @@
  import java.util.List;
  import java.util.UUID;
  
- import dtu.fm13.models.Customer;
+ import dtu.fm13.models.Account;
  import dtu.fm13.repository.CustomerRepository;
  import dtu.fm13.Service.CustomerService;
 import dtu.fm13.interfaces.PaymentInterface;
@@ -18,13 +18,13 @@ import dtu.fm13.interfaces.PaymentInterface;
          this.customerRepository = customerRepository;
      }
  
-     public List<Customer> getCustomers() {
+     public List<Account> getCustomers() {
          return customerRepository.getCustomers();
      }
  
-     public UUID createCustomer(Customer cust) {
+     public UUID createCustomer(Account cust) {
          System.out.println("Create customer, with BankID :" + cust.getAccountID());
-         Customer customer = new Customer();
+         Account customer = new Account();
          customer.setAccountID(cust.getAccountID());
          customerRepository.addCustomer(customer);
         //add to PaymentService
@@ -36,7 +36,7 @@ import dtu.fm13.interfaces.PaymentInterface;
      public boolean deleteCustomer(String customerID) {
         try {
             int listSize = customerRepository.getCustomers().size();
-             List<Customer> newlist = customerRepository.getCustomers();
+             List<Account> newlist = customerRepository.getCustomers();
              newlist.removeIf(c -> c.getId().equals(UUID.fromString(customerID)));
             if (listSize == newlist.size()) return false; 
             customerRepository.setCustomers(newlist);

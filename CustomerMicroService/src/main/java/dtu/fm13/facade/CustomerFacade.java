@@ -6,7 +6,7 @@ package dtu.fm13.facade;
 import java.util.List;
 import java.util.UUID;
 
-import dtu.fm13.models.Customer;
+import dtu.fm13.models.Account;
 import dtu.fm13.repository.CustomerRepository;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -30,13 +30,13 @@ public class CustomerFacade {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Customer> getCustomers() {
+    public List<Account> getCustomers() {
         return customerRepository.getCustomers();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public UUID createCustomer(Customer customer) {
+    public UUID createCustomer(Account customer) {
               
     	UUID toReturn= customerService.createCustomer(customer);
         System.out.println("IDtoReturn:" + toReturn);

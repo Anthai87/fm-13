@@ -3,7 +3,7 @@
 package dtu.fm13.interfaces;
 
 import java.util.List;
-import dtu.fm13.models.Customer;
+import dtu.fm13.models.Account;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -24,16 +24,16 @@ public class MerchantInterface {
 	this.webTarget = client.target("http://localhost:8000");
 	}
 	
-	public List<Customer> Report(String id) {
+	public List<Account> Report(String id) {
 		WebTarget personWebTarget = webTarget.path("/merchants/" +id+ "/report");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.get();
-		List<Customer> personList = response.readEntity(new GenericType<List<Customer>>() {});
+		List<Account> personList = response.readEntity(new GenericType<List<Account>>() {});
 		
 		return personList;
 	}
 
-	public Response create(Customer customer) {
+	public Response create(Account customer) {
 		WebTarget personWebTarget = webTarget.path("/merchants");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.post(Entity.entity(customer, MediaType.APPLICATION_JSON));

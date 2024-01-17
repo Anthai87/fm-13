@@ -10,8 +10,9 @@ import java.util.UUID;
 
 import dtu.fm13.helpers.UserHelper;
 import dtu.fm13.interfaces.CustomerInterface;
+import dtu.fm13.interfaces.MerchantInterface;
 import dtu.fm13.interfaces.PaymentInterface;
-import dtu.fm13.models.Customer;
+import dtu.fm13.models.Account;
 import dtu.fm13.models.Payment;
 import dtu.ws.fastmoney.BankService;
 import dtu.ws.fastmoney.BankServiceException_Exception;
@@ -24,14 +25,16 @@ import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.Response;
 
 public class PaymentServiceSteps {
-	private Customer customer;
-	private Customer merchant;
+	private Account customer;
+	private Account merchant;
 	private Payment payment;
 	private PaymentInterface paymentService = new PaymentInterface();
 	private int returncode;
 	private List<Payment> payments;
 	private final BankService bankService = new BankServiceService().getBankServicePort();
 	private CustomerInterface customerService = new CustomerInterface();
+
+	private MerchantInterface merchantInterfaceService = new MerchantInterface();
 	private UserHelper userHelper = new UserHelper();
 	
 	
@@ -39,7 +42,7 @@ public class PaymentServiceSteps {
 	// Harald & Elias
 	@Given("a customer with id {string}")
 	public void aCustomerWithId(String id) {
-		customer = new Customer();
+		customer = new Account();
 		customer.setId(UUID.fromString(id));
 		User user = userHelper.getCustomer();
 		String bankID = userHelper.getBankID(user);
@@ -54,19 +57,19 @@ public class PaymentServiceSteps {
 	// Harald &Elias
 	@Given("a merchant with id {string}")
 	public void aMerchantWithId(String id) {
-		merchant = new Customer();
+		merchant = new Account();
 		User user = userHelper.getMerchant();
 		String bankID = userHelper.getBankID(user);
 		merchant.setAccountID(bankID);
 		assertNotNull(merchant.getAccountID());
-		Response response = customerService.create(merchant);
+		Response response = merchantInterfaceService.create(merchant);
 		System.out.println("setting merchant id");
 		merchant.setId(response.readEntity(new GenericType<UUID>() {}));
 		assertNotNull(merchant.getId());
 
 	}
 
-	// Haraldhttp://fm-00.compute.dtu.dk/rest/accounts
+	// Harald
 	@When("the merchant initiates a payment for {int} kr by the customer")
 	public void theMerchantInitiatesAPaymentForKrByTheCustomer(Integer amount) {
 		payment = new Payment(customer.getId(), merchant.getId(), amount);
@@ -84,7 +87,7 @@ public class PaymentServiceSteps {
 	@Given("a successful payment of {int} kr from customer with name {string} to merchant {string}")
 	public void aSuccessfulPaymentOfKrFromCustomerToMerchant(Integer amount, String cust, String mer) {
 		User user = userHelper.getCustomer();
-		customer = new Customer();
+		customer = new Account();
 		customer.setFirstName(cust);
 		String bankID = userHelper.getBankID(user);
 		customer.setAccountID(bankID);
@@ -93,11 +96,11 @@ public class PaymentServiceSteps {
 		}));
 
 		User user2 = userHelper.getCustomer();
-		merchant = new Customer();
+		merchant = new Account();
 		merchant.setFirstName(mer);
 		bankID = userHelper.getBankID(user2);
 		merchant.setAccountID(bankID);
-		response = customerService.create(merchant);
+		response = merchantInterfaceService.create(merchant);
 		merchant.setId(response.readEntity(new GenericType<UUID>() {
 		}));
 		payment = new Payment();
@@ -126,7 +129,7 @@ public class PaymentServiceSteps {
 		user.setCprNumber(UUID.randomUUID().toString());
 		user.setFirstName("mister");
 		user.setLastName("bean");
-		customer = new Customer();
+		customer = new Account();
 		customer.setAccountID((userHelper.createBankAccount(user, int1)));
 		BigDecimal amount = new BigDecimal(0);
 		try {
@@ -151,7 +154,7 @@ public class PaymentServiceSteps {
 		user.setCprNumber(UUID.randomUUID().toString());
 		user.setFirstName("mister");
 		user.setLastName("bean");
-		merchant = new Customer();
+		merchant = new Account();
 		merchant.setAccountID((userHelper.createBankAccount(user, int1)));
 		BigDecimal amount = new BigDecimal(0);
 		//Move to server!!!!
@@ -169,7 +172,7 @@ public class PaymentServiceSteps {
 	@Given("that the merchant is registered with DTU Pay")
 	public void thatTheMerchantIsRegisteredWithDTUPay() {
 
-		Response response = customerService.create(merchant);
+		Response response = merchantInterfaceService.create(merchant);
 		merchant.setId(response.readEntity(new GenericType<UUID>() {}));
 		assertNotNull(merchant.getId());
 

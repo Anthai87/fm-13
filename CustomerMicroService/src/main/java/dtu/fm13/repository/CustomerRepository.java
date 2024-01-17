@@ -6,22 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import dtu.fm13.models.Customer;
+import dtu.fm13.models.Account;
 import dtu.fm13.models.Payment;
 
 public class CustomerRepository {
 
     private List<Payment> payments = new ArrayList<>();
-    private List<Customer> customers = new ArrayList<>();
+    private List<Account> customers = new ArrayList<>();
 
-    public List<Customer> getCustomers() {
+    public List<Account> getCustomers() {
         return customers;
     }
 
     public CustomerRepository() {
     }
 
-    public void setCustomers(List<Customer> customers) {
+    public void setCustomers(List<Account> customers) {
         this.customers = customers;
     }
 
@@ -33,14 +33,14 @@ public class CustomerRepository {
         this.payments = payments;
     }
 
-    public void addCustomer(Customer customer) {
+    public void addCustomer(Account customer) {
         //TODO check CPR if exists already
         customer.setId(UUID.randomUUID());
         customers.add(customer);
     }
 
     public boolean existsCustomer(UUID id) {
-        for (Customer customer : getCustomers()) {
+        for (Account customer : getCustomers()) {
             if (customer.getId().equals(id)) {
                 return true;
             }
@@ -52,7 +52,7 @@ public class CustomerRepository {
         payments.add(payment);
     }
     public String getCustomerBankID(UUID uuid) {
-    	for (Customer cust: customers) {
+    	for (Account cust: customers) {
     		if (cust.getId().equals(uuid)) {
     			return cust.getAccountID();
     		}
