@@ -1,2 +1,2 @@
 mvn package clean install
-docker build --tag customerservice . 
+docker build --tag merchantservice . 

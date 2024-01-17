@@ -9,6 +9,15 @@ cd ..
 cd PaymentMicroService
 ./build.sh 
 cd ..
+#reportService
+cd ReportMicroService
+./build.sh 
+cd ..
+#MerchantService
+cd MerchantMicroService
+./build.sh 
+cd ..
+
 
 docker-compose -f docker-compose.yml up -d --build --force-recreate 
 

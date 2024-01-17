@@ -7,7 +7,13 @@ services:
     restart: "always"
     expose:
       - "8080"
-
+  merchantservice:
+    build: MerchantMicroService/.
+    image: merchantmicroservice
+    container_name: "merchant"
+    restart: "always"
+    expose:
+      - "8080"
   paymentservice:
     build: PaymentMicroService/.
     image: paymentmicroservice
@@ -46,6 +52,7 @@ services:
       - paymentservice
       - reportservice
       - swagger
+      - merchantservice
     ports:
       - "8000:8000"
 
