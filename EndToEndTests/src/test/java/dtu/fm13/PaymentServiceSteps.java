@@ -119,7 +119,7 @@ public class PaymentServiceSteps {
 	public void theListContainsAPaymentsWhereCustomerPaidKrToMerchant(String cust, Integer amount, String mer) {
 		assertTrue(payments.contains(payment));
 	}
-
+	//Harald
 	@Given("a customer with a bank account with balance {int}")
 	public void aCustomerWithABankAccountWithBalance(Integer int1) {
 		User user = new User();
@@ -137,14 +137,14 @@ public class PaymentServiceSteps {
 		}
 		assertEquals(int1, amount.intValue());
 	}
-
+	//Harald
 	@Given("that the customer is registered with DTU Pay")
 	public void thatTheCustomerIsRegisteredWithDTUPay() {
 		Response response = customerService.create(customer);
 		customer.setId(response.readEntity(new GenericType<UUID>() {}));
 		assertNotNull(customer.getId());
 	}
-
+	//Harald
 	@Given("a merchant with a bank account with balance {int}")
 	public void aMerchantWithABankAccountWithBalance(Integer int1) {
 		User user = new User();
@@ -165,7 +165,7 @@ public class PaymentServiceSteps {
 	}
 
 	
-
+	//Harald
 	@Given("that the merchant is registered with DTU Pay")
 	public void thatTheMerchantIsRegisteredWithDTUPay() {
 
@@ -174,7 +174,7 @@ public class PaymentServiceSteps {
 		assertNotNull(merchant.getId());
 
 	}
-
+	//Harald
 	@Then("the balance of the customer at the bank is {int} kr")
 	public void theBalanceOfTheCustomerAtTheBankIsKr(Integer int1) {
 		BigDecimal balance= new BigDecimal(-1);
@@ -186,7 +186,7 @@ public class PaymentServiceSteps {
 		}
 		assertEquals(int1,balance.intValue());
 	}
-
+	//Harald
 	@Then("the balance of the merchant at the bank is {int} kr")
 	public void theBalanceOfTheMerchantAtTheBankIsKr(Integer int1) {
 		BigDecimal balance= new BigDecimal(-1);

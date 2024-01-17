@@ -2,7 +2,6 @@
  */
 package dtu.fm13.interfaces;
 
-import java.util.ArrayList;
 import java.util.List;
 import dtu.fm13.models.Customer;
 import jakarta.ws.rs.client.Client;

@@ -1,6 +1,5 @@
 package dtu.fm13;
 
-import org.junit.jupiter.api.AfterEach;
 
 /**
  * A test class to check which tests are run with which framework.
