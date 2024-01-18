@@ -1,4 +1,4 @@
-/*Harald
+/*Harald, Anthony og Elias
  */
 package dtu.fm13.interfaces;
 

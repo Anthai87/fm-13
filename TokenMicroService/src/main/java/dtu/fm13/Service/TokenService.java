@@ -10,34 +10,37 @@ import dtu.fm13.repository.TokenRepository;
 //import dtu.fm13.interfaces.PaymentInterface;
 
 
+/**
+ * @authors Elias, Anthony & Harald
+ */
+
+
 public class TokenService {
     TokenRepository tokenRepository;
 
     public TokenService(TokenRepository tokenRepository) {
-        this.tokenRepository= tokenRepository;
+        this.tokenRepository = tokenRepository;
     }
 
     public List<TokenRequest> getTokens(String id) {
-       //generere en liste af tokens
-       List<TokenRequest> tokenList=tokenRepository.getCustomerTokens(id);
-       //krav max 5 aktive tokens
-       int size=5-tokenList.size();
-       for (int i=0; i<size; i++){
-            TokenRequest token =new TokenRequest();
+        //generere en liste af tokens
+        List<TokenRequest> tokenList = tokenRepository.getCustomerTokens(id);
+        //krav max 5 aktive tokens
+        int size = 5 - tokenList.size();
+        for (int i = 0; i < size; i++) {
+            TokenRequest token = new TokenRequest();
             token.setUserid(id);
             token.setToken(UUID.randomUUID());
             tokenRepository.add(token);
             tokenList.add(token);
-       }
-       return tokenList;
-        
+        }
+        return tokenList;
+
     }
 
     public TokenRequest authenticate(TokenRequest tokenrequest) {
         return tokenRepository.exists(tokenrequest);
     }
-
-   
 
 
 }

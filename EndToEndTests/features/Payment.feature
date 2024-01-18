@@ -1,4 +1,4 @@
-#Harald
+#Harald, Elias og Anthony
 Feature: Payment 
 Scenario: Successful Payment with token
 Given a customer with a bank account with balance 1000

@@ -1,4 +1,7 @@
-/*Harald & ELias & Anthony
+/**
+ *
+ * @uthors Harald & ELias & Anthony
+ *
  */
 package dtu.fm13.Payment.facade;
 

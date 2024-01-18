@@ -11,7 +11,10 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * @authors  Anthony  & Harald & Elias*/
+ *
+ * @authors  Anthony, Harald & Elias
+ *
+ * */
 
 public class TokenFacade {
     private TokenService tokenService;

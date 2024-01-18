@@ -1,7 +1,7 @@
-/*Harald
-
-/*Harald
- */
+/**
+ * @author Harald
+ *
+ * */
 package dtu.fm13.Payment.Interfaces;
 
 import java.util.List;
