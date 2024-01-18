@@ -13,6 +13,11 @@ cd ..
 cd ReportMicroService
 ./build.sh 
 cd ..
+#tokenService
+cd TokenMicroService
+./build.sh 
+cd ..
+
 #MerchantService
 cd MerchantMicroService
 ./build.sh 

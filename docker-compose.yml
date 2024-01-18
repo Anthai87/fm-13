@@ -30,6 +30,13 @@ services:
      restart: "always"
      expose:
        - "8080"
+  tokenservice:
+     build: TokenMicroService/.
+     image: tokenmicroservice
+     container_name: "token"
+     restart: "always"
+     expose:
+       - "8080"
 
 
   swagger:
@@ -54,6 +61,7 @@ services:
       - reportservice
       - swagger
       - merchantservice
+      - tokenservice
     ports:
       - "8000:8000"
 

@@ -36,6 +36,7 @@ public class PaymentService {
                 bank.transferMoneyFromTo(payerBankAccount, recieverBankAccount, new BigDecimal(payment.getAmount()),
                         recieverBankAccount);
                 paymentRepository.addPayment(payment);
+                //Send payment to ReportMicroService
                 return true;
             } catch (BankServiceException_Exception e) {
          

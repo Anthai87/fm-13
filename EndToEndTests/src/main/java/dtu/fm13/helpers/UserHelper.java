@@ -5,6 +5,7 @@ package dtu.fm13.helpers;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import dtu.ws.fastmoney.Account;
 import dtu.ws.fastmoney.AccountInfo;
 import dtu.ws.fastmoney.BankService;
 import dtu.ws.fastmoney.BankServiceException_Exception;
@@ -58,16 +59,15 @@ public class UserHelper {
 
 	public String getBankID(User user) {
 		String bankID = "";
-		for (AccountInfo account : bankService.getAccounts()) {
-			if (account.getUser().getCprNumber().equals(user.getCprNumber())) {
-
-				bankID = account.getAccountId();
-			}
-		}
-
-		if (bankID.isEmpty()) {
+		try {
+			Account Bankaccount= bankService.getAccount(user.getCprNumber());
+			bankID=Bankaccount.getId();
+		} catch (BankServiceException_Exception e) {
 			bankID=createBankAccount(user,1000);
 		}
+			
+		
+
 		return bankID;
 	}
 
