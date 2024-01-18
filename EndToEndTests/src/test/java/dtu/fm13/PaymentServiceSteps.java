@@ -230,6 +230,13 @@ public void customerGivesTheMerchantAToken() {
 	token = tokenList.get(0);
 }
 
+@Then("the payment failed")
+public void thePaymentFailed() {
+	assertEquals(400, returncode);
+
+}
+
+
 @After
 public void cleanupBank(){
 	for (Account a: accounts){
