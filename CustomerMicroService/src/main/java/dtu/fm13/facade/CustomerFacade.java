@@ -45,14 +45,22 @@ public class CustomerFacade {
 
     @Path("{customerID}")
     @DELETE
-    public Response deleteCustomer(@PathParam("customerID") String custumerID) {
-        System.out.println("Get delete request from:"+ custumerID);
-        if (customerService.deleteCustomer(custumerID)){
+    public Response deleteCustomer(@PathParam("customerID") String customerID) {
+        System.out.println("Get delete request from:"+ customerID);
+        if (customerService.deleteCustomer(customerID)){
             return Response.status(200).entity("Request processed successfully").build();
                 }
         return Response.status(400).entity("Invalid custumer ID. Please provide a valid input.").build();        
     }
+    @Path("{customerID}/tokens")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<String> getTokens(@PathParam("customerID") String customerID){
+        System.out.println("Get token request from:"+ customerID);
 
+        return customerService.getTokens(customerID);
+
+    }
     
     
 }

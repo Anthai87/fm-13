@@ -13,8 +13,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Payment {
-    private UUID payerId;
-    private UUID recieverId;
+    private UUID payerToken;
+	private UUID merchantId;
     private int amount;
 
 	
@@ -25,13 +25,13 @@ public class Payment {
         if (obj == null || getClass() != obj.getClass()) return false;
         Payment payment = (Payment) obj;
         return Objects.equals(amount, payment.amount) &&
-                Objects.equals(payerId, payment.payerId) &&
-                Objects.equals(recieverId, payment.recieverId);
+                Objects.equals(payerToken, payment.getPayerToken()) &&
+                Objects.equals(merchantId, payment.merchantId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(payerId, recieverId, amount);
+        return Objects.hash(payerToken, merchantId, amount);
     }
 }
 

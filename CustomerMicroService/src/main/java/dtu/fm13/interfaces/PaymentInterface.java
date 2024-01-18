@@ -46,7 +46,6 @@ public class PaymentInterface {
 		PaymentCustomer pCustomer = new PaymentCustomer();
         pCustomer.setAccountID(customer.getAccountID());
 		pCustomer.setId(customer.getId());
-		System.out.println("Sending to payment, Bank ID: " +pCustomer.getAccountID());
         WebTarget personWebTarget = webTarget.path("/payments/customer");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		invocationBuilder.post(Entity.entity(pCustomer, MediaType.APPLICATION_JSON));

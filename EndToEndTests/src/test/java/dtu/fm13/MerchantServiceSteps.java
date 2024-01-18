@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import dtu.fm13.interfaces.CustomerInterface;
 import dtu.fm13.interfaces.MerchantInterface;
 import dtu.fm13.models.Account;
 import io.cucumber.java.en.Given;

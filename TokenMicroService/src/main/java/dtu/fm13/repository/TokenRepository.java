@@ -32,13 +32,14 @@ public class TokenRepository {
     }
 
     public TokenRequest exists(TokenRequest tokenrequest) {
+       
         for (TokenRequest token : tokenList) {
             if (token.getToken().equals(tokenrequest.getToken())) {
                 tokenrequest.setUserid(token.getUserid());
                 tokenList.remove(token);
+                break;
             }
         }
-
         return tokenrequest;
     }
 

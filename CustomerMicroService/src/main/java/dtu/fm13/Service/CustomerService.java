@@ -3,17 +3,21 @@
 
  package dtu.fm13.Service;
 
- import java.util.List;
+ import java.util.ArrayList;
+import java.util.List;
  import java.util.UUID;
  
  import dtu.fm13.models.Account;
- import dtu.fm13.repository.CustomerRepository;
+import dtu.fm13.models.TokenRequest;
+import dtu.fm13.repository.CustomerRepository;
  import dtu.fm13.Service.CustomerService;
 import dtu.fm13.interfaces.PaymentInterface;
+import dtu.fm13.interfaces.TokenInterface;
  public class CustomerService {
  
     private CustomerRepository customerRepository;
     private PaymentInterface paymentInterface= new PaymentInterface();
+    private TokenInterface tokenInterface= new TokenInterface();
     public CustomerService(CustomerRepository customerRepository) {
          this.customerRepository = customerRepository;
      }
@@ -51,7 +55,13 @@ import dtu.fm13.interfaces.PaymentInterface;
     public boolean exists(String accountID) {
         return customerRepository.existsCustomer(UUID.fromString(accountID));
     }
- 
-    
- 
- }
+
+    public List<String> getTokens(String customerID) {
+        List<TokenRequest> tokens= tokenInterface.tokenlist(customerID);
+        List<String> tokenAsStrings = new ArrayList<>();
+        for (TokenRequest t: tokens){
+            tokenAsStrings.add(t.getToken().toString());
+        }
+        return tokenAsStrings;
+    }
+}

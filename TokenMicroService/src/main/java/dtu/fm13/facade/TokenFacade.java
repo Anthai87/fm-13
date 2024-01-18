@@ -25,18 +25,23 @@ public class TokenFacade {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response authenticateToken(TokenRequest tokenrequest) {
+        System.out.println("token authentication started");
+        System.out.println("Token:" + tokenrequest.getToken());
         tokenrequest=tokenService.authenticate(tokenrequest);
-        
-        if(tokenrequest.getUserid().isEmpty()){
-            return Response.status(Response.Status.BAD_REQUEST).build();   
+        System.out.println("authentication status:");
+     
+
+        if(tokenrequest.getUserid()==null){
+            System.out.println("failed");
+            return Response.status(Response.Status.BAD_REQUEST).entity(tokenrequest).build();   
         }
-        return Response.status(Response
-                .Status.CREATED).entity(tokenrequest).build();
+         System.out.println("successfull");
+        return Response.status(Response.Status.CREATED).entity(tokenrequest).build();
     }
 
 
     @GET
-    @Path("{id}")
+    @Path("{id}/tokens")
     @Produces(MediaType.APPLICATION_JSON)
     public List<TokenRequest> getTokens(@PathParam("id") String id) {
         return tokenService.getTokens(id);

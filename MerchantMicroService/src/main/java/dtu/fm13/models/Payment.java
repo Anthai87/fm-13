@@ -1,4 +1,4 @@
-/*Harald & Anthony
+/*Harald
  */
 package dtu.fm13.models;
 
@@ -6,38 +6,38 @@ import java.util.UUID;
 
 public class Payment {
 
-    private UUID payerId;
+    private UUID payerToken;
     
-	private UUID recieverId;
+	private UUID merchantId;
     private int amount;
 
     public Payment() {
     }
 
     public Payment(UUID payerId, UUID recieverId, int amount) {
-        this.payerId = payerId;
-        this.recieverId = recieverId;
+        this.payerToken = payerId;
+        this.merchantId = recieverId;
         this.amount = amount;
     }
 
    
-    public UUID getPayerId() {
-        return payerId;
+    public UUID getPayerToken() {
+        return payerToken;
     }
 
-    public UUID getRecieverId() {
-        return recieverId;
+    public UUID getMerchantId() {
+        return merchantId;
     }
 
     public int getAmount() {
         return amount;
     }
-    public void setPayerId(UUID payerId) {
-		this.payerId = payerId;
+    public void setPayerToken(UUID payerId) {
+		this.payerToken = payerId;
 	}
 
-	public void setRecieverId(UUID recieverId) {
-		this.recieverId = recieverId;
+	public void setMerchantId(UUID recieverId) {
+		this.merchantId = recieverId;
 	}
 
 	public void setAmount(int amount) {

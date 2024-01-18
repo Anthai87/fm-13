@@ -39,6 +39,8 @@ public class PaymentServiceSteps {
 
 	private MerchantInterface merchantInterfaceService = new MerchantInterface();
 	private UserHelper userHelper = new UserHelper();
+	private List<String> tokenList;
+	private String token;
 	
 	
 
@@ -77,7 +79,8 @@ public class PaymentServiceSteps {
 	// Harald
 	@When("the merchant initiates a payment for {int} kr by the customer")
 	public void theMerchantInitiatesAPaymentForKrByTheCustomer(Integer amount) {
-		payment = new Payment(customer.getId(), merchant.getId(), amount);
+		
+		payment = new Payment(UUID.fromString(token), merchant.getId(), amount);
 
 		returncode = paymentService.postPayment(payment);
 	}
@@ -109,8 +112,8 @@ public class PaymentServiceSteps {
 		merchant.setId(response.readEntity(new GenericType<UUID>() {
 		}));
 		payment = new Payment();
-		payment.setPayerId(customer.getId());
-		payment.setRecieverId(merchant.getId());
+		payment.setPayerToken(UUID.fromString(token));
+		payment.setMerchantId(merchant.getId());
 		payment.setAmount(amount);
 		theMerchantInitiatesAPaymentForKrByTheCustomer(amount);
 		thePaymentIsSuccessful();
@@ -208,18 +211,34 @@ public class PaymentServiceSteps {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals(int1,balance);
+		assertEquals(int1,balance.intValue());
 	}
 
-	@After
-	public void cleanupBank(){
-		for (Account a: accounts){
-			try {
-				bankService.retireAccount(a.getAccountID());
-			} catch (BankServiceException_Exception e) {
-				
-			}
+
+@When("a customer requests tokens")
+public void aCustomerRequestsTokens() {
+    tokenList =customerService.tokenlist(customer);
+}
+
+@Then("dtu-Pay returns a list of {int} tokens")
+public void dtuPayReturnsAListOfTokens(Integer int1) {
+    assertEquals(int1, tokenList.size());
+}
+
+@When("customer gives the merchant a token")
+public void customerGivesTheMerchantAToken() {
+	token = tokenList.get(0);
+}
+
+@After
+public void cleanupBank(){
+	for (Account a: accounts){
+		try {
+			bankService.retireAccount(a.getAccountID());
+		} catch (BankServiceException_Exception e) {
+			
 		}
 	}
+}
 
 }

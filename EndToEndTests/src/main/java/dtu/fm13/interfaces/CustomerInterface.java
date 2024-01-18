@@ -45,6 +45,13 @@ public class CustomerInterface {
 		Response response = invocationBuilder.delete();
 		return response;
 	}
+    public List<String> tokenlist(Account customer) {
+        WebTarget personWebTarget = webTarget.path("/customers/"+customer.getId().toString()+"/tokens");
+		Invocation.Builder invocationBuilder = personWebTarget.request();
+		Response response = invocationBuilder.get();
+		return response.readEntity(new GenericType<List<String>>() {});
+
+    }
 	
 	//gettokens
 	//getreports

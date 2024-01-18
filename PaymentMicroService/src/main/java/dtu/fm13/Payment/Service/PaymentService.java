@@ -4,10 +4,13 @@ package dtu.fm13.Payment.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
+import dtu.fm13.Payment.Interfaces.TokenInterface;
 import dtu.fm13.Payment.Repository.PaymentRepository;
-import dtu.fm13.Payment.models.account;
+import dtu.fm13.Payment.models.Account;
 import dtu.fm13.Payment.models.Payment;
+import dtu.fm13.Payment.models.TokenRequest;
 import dtu.ws.fastmoney.BankService;
 import dtu.ws.fastmoney.BankServiceException_Exception;
 import dtu.ws.fastmoney.BankServiceService;
@@ -15,7 +18,8 @@ import dtu.ws.fastmoney.BankServiceService;
 public class PaymentService {
     BankService bank = new BankServiceService().getBankServicePort();
     PaymentRepository paymentRepository;
-
+    private TokenInterface tokenInterface= new TokenInterface();
+  
     public PaymentService(PaymentRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
     }
@@ -25,11 +29,16 @@ public class PaymentService {
     }
 
     public boolean add(Payment payment) {
-        if (paymentRepository.customerExists(payment.getPayerId())
-                && paymentRepository.customerExists(payment.getRecieverId())) {
+        //token authentic
+        //merchant exist
+        TokenRequest request = tokenInterface.authenticate(payment.getPayerToken());
+         if (request.getUserid()==null) return false;
+        System.out.println("token accepted!");
+        if (!paymentRepository.merchantExists(payment.getMerchantId())) return false;
+
         
-            String payerBankAccount = paymentRepository.getCustomerBankID(payment.getPayerId());
-            String recieverBankAccount = paymentRepository.getCustomerBankID(payment.getRecieverId());
+            String payerBankAccount = paymentRepository.getCustomerBankID(UUID.fromString(request.getUserid()));
+            String recieverBankAccount = paymentRepository.getCustomerBankID(payment.getMerchantId());
             System.out.println("pID:" + payerBankAccount + ". rID:" + recieverBankAccount);
             try {
          
@@ -44,13 +53,10 @@ public class PaymentService {
                 e.printStackTrace();
                 return false;
             }
-        }
-      
-        //paymentRepository.addPayment(payment);
-        return false;
-    }
+        
+ }
 
-    public boolean addCustomer(account customer) {
+    public boolean addCustomer(Account customer) {
         return paymentRepository.addCustomer(customer);
     }
 }
