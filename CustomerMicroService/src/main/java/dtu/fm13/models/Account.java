@@ -16,12 +16,6 @@ public class Account {
     private String cpr;
     private String firstName;
     private String lastName;
-
-    public Account(String name, String address) {
-        this.firstName = name;
-        this.lastName = address;
-    }
-
 	
     @Override
     public boolean equals(Object o) {
