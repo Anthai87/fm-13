@@ -5,7 +5,10 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import dtu.fm13.interfaces.ReportsInterface;
+import dtu.fm13.models.Account;
 import dtu.fm13.models.PaymentInformation;
+import dtu.ws.fastmoney.BankServiceException_Exception;
+import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
@@ -76,6 +79,16 @@ public class managerServiceSteps {
             }
         }
         assertTrue(test);
+    }
+     @After
+    public void cleanupBank() {
+        for (Account a : paymentServiceSteps.accounts) {
+            try {
+                paymentServiceSteps.bankService.retireAccount(a.getAccountID());
+            } catch (BankServiceException_Exception e) {
+
+            }
+        }
     }
 
 }

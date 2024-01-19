@@ -34,7 +34,7 @@ public class PaymentServiceSteps {
     private PaymentInterface paymentService = new PaymentInterface();
     private int returncode;
     private List<Payment> payments;
-    private final BankService bankService = new BankServiceService().getBankServicePort();
+     final BankService bankService = new BankServiceService().getBankServicePort();
     private CustomerInterface customerService = new CustomerInterface();
 
     private MerchantInterface merchantInterfaceService = new MerchantInterface();
