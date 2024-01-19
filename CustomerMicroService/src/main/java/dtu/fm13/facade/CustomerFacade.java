@@ -22,10 +22,9 @@ public class CustomerFacade {
     private CustomerRepository customerRepository;
     private CustomerService customerService;
 
-
     public CustomerFacade(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
-        this.customerService= new CustomerService(customerRepository);
+        this.customerService = new CustomerService(customerRepository);
     }
 
     @GET
@@ -37,8 +36,7 @@ public class CustomerFacade {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public UUID createCustomer(Account customer) {
-              
-    	UUID toReturn= customerService.createCustomer(customer);
+        UUID toReturn = customerService.createCustomer(customer);
         System.out.println("IDtoReturn:" + toReturn);
         return toReturn;
     }
@@ -46,21 +44,21 @@ public class CustomerFacade {
     @Path("{customerID}")
     @DELETE
     public Response deleteCustomer(@PathParam("customerID") String customerID) {
-        System.out.println("Get delete request from:"+ customerID);
-        if (customerService.deleteCustomer(customerID)){
+        System.out.println("Get delete request from:" + customerID);
+        if (customerService.deleteCustomer(customerID)) {
             return Response.status(200).entity("Request processed successfully").build();
-                }
-        return Response.status(400).entity("Invalid custumer ID. Please provide a valid input.").build();        
+        }
+        return Response.status(400).entity("Invalid custumer ID. Please provide a valid input.").build();
     }
+
     @Path("{customerID}/tokens")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<String> getTokens(@PathParam("customerID") String customerID){
-        System.out.println("Get token request from:"+ customerID);
+    public List<String> getTokens(@PathParam("customerID") String customerID) {
+        System.out.println("Get token request from:" + customerID);
 
         return customerService.getTokens(customerID);
 
     }
-    
-    
+
 }

@@ -11,9 +11,10 @@ import jakarta.ws.rs.Path;
 @Path("/")
 public class TopFacade {
     PaymentRepository paymentRepository = new PaymentRepository();
+
     @Path("payments/")
     public PaymentFacade getPaymentFacade() {
-    	return new PaymentFacade(paymentRepository);
-        
+        return new PaymentFacade(paymentRepository);
+
     }
 }

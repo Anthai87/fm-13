@@ -11,6 +11,5 @@ public class TopFacade {
     @Path("customers/")
     public CustomerFacade getCustomerService() {
     	return new CustomerFacade(customerRepository);
-        
     }
 }

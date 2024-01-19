@@ -11,51 +11,51 @@ import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.Response;
 
-
-
 public class TokenInterface {
-	
 	WebTarget webTarget;
 
 	public TokenInterface() {
-	Client client = ClientBuilder.newClient();
-	this.webTarget = client.target("http://tokenservice:8080");
+		Client client = ClientBuilder.newClient();
+		this.webTarget = client.target("http://tokenservice:8080");
 	}
 
-    public List<TokenRequest> tokenlist(String customerID) {
-		 	WebTarget paymentWebTarget = webTarget.path("/tokens/" +customerID+ "/tokens");
-			System.out.println("sending request");
-		 	Invocation.Builder invocationBuilder = paymentWebTarget.request();
-		 	Response response = invocationBuilder.get();
-			System.out.println("request returned :" + response.getStatus());
-		 	List<TokenRequest> tokenList = response.readEntity(new GenericType<List<TokenRequest>>() {});
-			return tokenList;
-    }
+	public List<TokenRequest> tokenlist(String customerID) {
+		WebTarget paymentWebTarget = webTarget.path("/tokens/" + customerID + "/tokens");
+		System.out.println("sending request");
+		Invocation.Builder invocationBuilder = paymentWebTarget.request();
+		Response response = invocationBuilder.get();
+		System.out.println("request returned :" + response.getStatus());
+		List<TokenRequest> tokenList = response.readEntity(new GenericType<List<TokenRequest>>() {
+		});
+		return tokenList;
+	}
 
-	
 	// public int add(Payment payment) {
-	// 	WebTarget personWebTarget = webTarget.path("/payments");
-	// 	Invocation.Builder invocationBuilder = personWebTarget.request();
-	// 	Response response = invocationBuilder.post(Entity.entity(payment, MediaType.APPLICATION_JSON));
-	// 	return response.getStatus();
+	// WebTarget personWebTarget = webTarget.path("/payments");
+	// Invocation.Builder invocationBuilder = personWebTarget.request();
+	// Response response = invocationBuilder.post(Entity.entity(payment,
+	// MediaType.APPLICATION_JSON));
+	// return response.getStatus();
 	// }
 
 	// public List<Payment> getList(Account merchant) {
-	// 	WebTarget paymentWebTarget = webTarget.path("/payments");
-	// 	Invocation.Builder invocationBuilder = paymentWebTarget.request();
-	// 	Response response = invocationBuilder.get();
-	// 	List<Payment> paymentList = response.readEntity(new GenericType<List<Payment>>() {});
-	// 	return paymentList;
-		
+	// WebTarget paymentWebTarget = webTarget.path("/payments");
+	// Invocation.Builder invocationBuilder = paymentWebTarget.request();
+	// Response response = invocationBuilder.get();
+	// List<Payment> paymentList = response.readEntity(new
+	// GenericType<List<Payment>>() {});
+	// return paymentList;
+
 	// }
 
-    // public void addCustomer(Account customer) {
-	// 	PaymentCustomer pCustomer = new PaymentCustomer();
-    //     pCustomer.setAccountID(customer.getAccountID());
-	// 	pCustomer.setId(customer.getId());
-	// 	System.out.println("Sending to payment, Bank ID: " +pCustomer.getAccountID());
-    //     WebTarget personWebTarget = webTarget.path("/payments/customer");
-	// 	Invocation.Builder invocationBuilder = personWebTarget.request();
-	// 	invocationBuilder.post(Entity.entity(pCustomer, MediaType.APPLICATION_JSON));
-    // }
+	// public void addCustomer(Account customer) {
+	// PaymentCustomer pCustomer = new PaymentCustomer();
+	// pCustomer.setAccountID(customer.getAccountID());
+	// pCustomer.setId(customer.getId());
+	// System.out.println("Sending to payment, Bank ID: "
+	// +pCustomer.getAccountID());
+	// WebTarget personWebTarget = webTarget.path("/payments/customer");
+	// Invocation.Builder invocationBuilder = personWebTarget.request();
+	// invocationBuilder.post(Entity.entity(pCustomer, MediaType.APPLICATION_JSON));
+	// }
 }

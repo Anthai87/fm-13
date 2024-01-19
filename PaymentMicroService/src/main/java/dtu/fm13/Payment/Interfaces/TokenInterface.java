@@ -30,10 +30,8 @@ public class TokenInterface {
 
     public List<TokenRequest> tokenlist(String customerID) {
 		 	WebTarget paymentWebTarget = webTarget.path("/tokens/" +customerID+ "/tokens");
-			System.out.println("sending request");
 		 	Invocation.Builder invocationBuilder = paymentWebTarget.request();
 		 	Response response = invocationBuilder.get();
-			System.out.println("request returned :" + response.getStatus());
 		 	List<TokenRequest> tokenList = response.readEntity(new GenericType<List<TokenRequest>>() {});
 			return tokenList;
     }
