@@ -3,6 +3,9 @@ package dtu.fm13.facade;
 import dtu.fm13.repository.ReportRepository;
 import jakarta.ws.rs.Path;
 
+/**
+ * @authors Elias & Anthony
+ */
 @Path("/")
 public class TopFacade {
     ReportRepository reportRepository = new ReportRepository();

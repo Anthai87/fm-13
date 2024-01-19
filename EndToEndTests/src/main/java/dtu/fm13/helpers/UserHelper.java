@@ -1,5 +1,6 @@
-/* Anthony & Harald
- */
+/**
+ * @authers Harald, Anthony
+ * */
 package dtu.fm13.helpers;
 
 import java.math.BigDecimal;

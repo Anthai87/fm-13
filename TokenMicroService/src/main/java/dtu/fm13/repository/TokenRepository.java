@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @authors Elias & Anthony
+ * @authors Elias, Anthony & Harald
  */
 
 @Setter

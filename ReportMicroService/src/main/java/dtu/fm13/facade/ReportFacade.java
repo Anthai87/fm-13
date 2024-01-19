@@ -62,7 +62,5 @@ public class ReportFacade {
     }
 }
 
-    ///Get, report/id* return en list hvori personen indgår
-
 
 

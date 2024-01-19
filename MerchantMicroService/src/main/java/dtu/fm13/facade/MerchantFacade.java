@@ -1,4 +1,7 @@
-/*Harald
+/**
+ *
+ * @uthor Harald & ELias & Anthony
+ *
  */
 
 package dtu.fm13.facade;
