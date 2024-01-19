@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+import dtu.fm13.Payment.Interfaces.ReportInterface;
 import dtu.fm13.Payment.Interfaces.TokenInterface;
 import dtu.fm13.Payment.Repository.PaymentRepository;
 import dtu.fm13.Payment.models.Account;
@@ -22,13 +23,10 @@ public class PaymentService {
     BankService bank = new BankServiceService().getBankServicePort();
     PaymentRepository paymentRepository;
     private TokenInterface tokenInterface= new TokenInterface();
+    private ReportInterface reportsInterface= new ReportInterface();
   
     public PaymentService(PaymentRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
-    }
-
-    public List<Payment> getAllPayments() {
-        return paymentRepository.getPayments();
     }
 
     public boolean add(Payment payment) {
@@ -47,8 +45,9 @@ public class PaymentService {
          
                 bank.transferMoneyFromTo(payerBankAccount, recieverBankAccount, new BigDecimal(payment.getAmount()),
                         recieverBankAccount);
-                paymentRepository.addPayment(payment);
+                
                 //Send payment to ReportMicroService
+                reportsInterface.add(payment);
                 return true;
             } catch (BankServiceException_Exception e) {
          

@@ -30,4 +30,13 @@ public class ReportsInterface {
 		
 		return paymentList;
 	}
+
+    public List<Payment> payments() {
+		WebTarget personWebTarget = webTarget.path("/reports");
+		Invocation.Builder invocationBuilder = personWebTarget.request();
+		Response response = invocationBuilder.get();
+		List<Payment> paymentList = response.readEntity(new GenericType<List<Payment>>() {});
+		
+		return paymentList;
+    }
 }

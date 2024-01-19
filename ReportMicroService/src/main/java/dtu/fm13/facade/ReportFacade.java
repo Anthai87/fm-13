@@ -12,13 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @authors Elias & Anthony
+ * @authors Elias & Anthony & Harald
  */
 
 public class ReportFacade {
     private ReportRepository reportRepository;
     private ReportService reportService;
-
 
     public ReportFacade(ReportRepository reportRepository) {
         this.reportRepository = reportRepository;
@@ -30,37 +29,21 @@ public class ReportFacade {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createPayments(Payment payment) {
         reportRepository.addPayment(payment);
-        return Response.status(Response
-                .Status.CREATED).entity(payment).build();
+        return Response.status(Response.Status.CREATED).entity(payment).build();
     }
-
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Payment> getAllPayments() {
-        return reportRepository.getPayments();
+        return reportService.getPayments();
     }
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPaymentById(@PathParam("id") String paymentId) {
-        Optional<Payment> payment = reportRepository.getPaymentById(paymentId);
-        return payment.map(value -> Response.ok(value).build())
-                .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build());
-    }
+    public Response getPaymentsById(@PathParam("id") String paymentId) {
+        List<Payment> payment = reportService.getPaymentsById(paymentId);
+        return Response.ok(payment).build();
 
-    @DELETE
-    @Path("{id}")
-    public Response deletePayment(@PathParam("id") String paymentId) {
-        if (reportRepository.getPaymentById(paymentId).isPresent()) {
-            reportRepository.deletePayment(paymentId);
-            return Response.status(Response.Status.NO_CONTENT).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
     }
 }
-
-
-
