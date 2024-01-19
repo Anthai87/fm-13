@@ -19,9 +19,9 @@ import jakarta.ws.rs.core.Response;
 public class PaymentInterface {
 	
 	WebTarget webTarget;
-
-	public PaymentInterface() {
 	Client client = ClientBuilder.newClient();
+	
+	public PaymentInterface() {
 	this.webTarget = client.target("http://localhost:8000");
 	}
 	
@@ -30,6 +30,7 @@ public class PaymentInterface {
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.post(Entity.entity(payment, MediaType.APPLICATION_JSON));
 		return response.getStatus();
+
 	}
 
 	public List<Payment> getList(Account merchant) {

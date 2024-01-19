@@ -14,6 +14,4 @@ public class Account {
 	private UUID id;
 	private String accountID;
 	private Timestamp deleted;
-	
-
 }

@@ -18,9 +18,9 @@ import jakarta.ws.rs.core.Response;
 public class CustomerInterface {
 
 	WebTarget webTarget;
+	Client client = ClientBuilder.newClient();
 
 	public CustomerInterface() {
-	Client client = ClientBuilder.newClient();
 	this.webTarget = client.target("http://localhost:8000");
 	}
 	//For EndToEnd tests, to see if customers are created successfully
@@ -29,7 +29,6 @@ public class CustomerInterface {
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.get();
 		List<Account> personList = response.readEntity(new GenericType<List<Account>>() {});
-		
 		return personList;
 	}
 

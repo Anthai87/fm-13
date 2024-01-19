@@ -18,9 +18,9 @@ import jakarta.ws.rs.core.Response;
 public class MerchantInterface {
 
 	WebTarget webTarget;
+	Client client = ClientBuilder.newClient();
 
 	public MerchantInterface() {
-	Client client = ClientBuilder.newClient();
 	this.webTarget = client.target("http://localhost:8000");
 	}
 	//For EndToEnd tests, to see if customers are created successfully
@@ -37,7 +37,7 @@ public class MerchantInterface {
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.get();
 		List<Account> personList = response.readEntity(new GenericType<List<Account>>() {});
-		
+
 		return personList;
 	}
 
@@ -45,12 +45,14 @@ public class MerchantInterface {
 		WebTarget personWebTarget = webTarget.path("/merchants");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.post(Entity.entity(customer, MediaType.APPLICATION_JSON));
+
 		return response;
 	}
 	public Response delete(Account merchant) {
 		WebTarget personWebTarget = webTarget.path("/merchants/"+merchant.getId().toString());
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.delete();
+
 		return response;
 	}
 }

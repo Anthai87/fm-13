@@ -19,9 +19,9 @@ import jakarta.ws.rs.core.Response;
 public class ReportsInterface {
 
 	WebTarget webTarget;
+	Client client = ClientBuilder.newClient();
 
 	public ReportsInterface() {
-	Client client = ClientBuilder.newClient();
 	this.webTarget = client.target("http://localhost:8000");
 	}
 	
@@ -30,7 +30,6 @@ public class ReportsInterface {
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.get();
 		List<Payment> paymentList = response.readEntity(new GenericType<List<Payment>>() {});
-		
 		return paymentList;
 	}
 
@@ -39,7 +38,6 @@ public class ReportsInterface {
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.get();
 		List<PaymentInformation> paymentList = response.readEntity(new GenericType<List<PaymentInformation>>() {});
-		
 		return paymentList;
     }
 
@@ -48,7 +46,6 @@ public class ReportsInterface {
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.get();
 		List<PaymentInformation> paymentList = response.readEntity(new GenericType<List<PaymentInformation>>() {});
-		
 		return paymentList;
     }
 }

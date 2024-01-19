@@ -28,13 +28,5 @@ public class PaymentInterface {
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		invocationBuilder.post(Entity.entity(pCustomer, MediaType.APPLICATION_JSON));
 	}
-	// Todo Reporting
-	// public List<Payment> List(Account merchant) {
-	// WebTarget paymentWebTarget = webTarget.path("/payments");
-	// Invocation.Builder invocationBuilder = paymentWebTarget.request();
-	// Response response = invocationBuilder.get();
-	// List<Payment> paymentList = response.readEntity(new
-	// GenericType<List<Payment>>() {});
-	// return paymentList;
-	// }
+
 }

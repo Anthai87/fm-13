@@ -16,6 +16,4 @@ public class PaymentMessage {
 	public void setDeleted(Timestamp deleted) {
 		this.deleted = deleted;
 	}
-
-
 }

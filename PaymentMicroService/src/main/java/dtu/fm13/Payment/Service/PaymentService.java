@@ -23,46 +23,40 @@ import dtu.ws.fastmoney.BankServiceService;
 public class PaymentService {
     BankService bank = new BankServiceService().getBankServicePort();
     PaymentRepository paymentRepository;
-    private TokenInterface tokenInterface= new TokenInterface();
-    private ReportInterface reportsInterface= new ReportInterface();
-  
+    private TokenInterface tokenInterface = new TokenInterface();
+    private ReportInterface reportsInterface = new ReportInterface();
+
     public PaymentService(PaymentRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
     }
 
     public boolean add(Payment payment) {
-        //token authentic
-        //merchant exist
         TokenRequest request = tokenInterface.authenticate(payment.getPayerToken());
-         if (request.getUserid()==null) return false;
-        System.out.println("token accepted!");
-        if (!paymentRepository.merchantExists(payment.getMerchantId())) return false;
+        if (request.getUserid() == null)
+            return false;
+        if (!paymentRepository.merchantExists(payment.getMerchantId()))
+            return false;
 
-        
-            String payerBankAccount = paymentRepository.getCustomerBankID(UUID.fromString(request.getUserid()));
-            String recieverBankAccount = paymentRepository.getCustomerBankID(payment.getMerchantId());
-            System.out.println("pID:" + payerBankAccount + ". rID:" + recieverBankAccount);
-            try {
-         
-                bank.transferMoneyFromTo(payerBankAccount, recieverBankAccount, new BigDecimal(payment.getAmount()),
-                        recieverBankAccount);
-                
-                //Send payment to ReportMicroService
-                PaymentInformation p= new PaymentInformation();
-                p.setAmount(payment.getAmount());
-                p.setPayerId(request.getUserid());
-                p.setRecieverId(payment.getMerchantId().toString());
-                p.setToken(payment.getPayerToken().toString());
-                reportsInterface.add(p);
-                return true;
-            } catch (BankServiceException_Exception e) {
-         
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                return false;
-            }
-        
- }
+        String payerBankAccount = paymentRepository.getCustomerBankID(UUID.fromString(request.getUserid()));
+        String recieverBankAccount = paymentRepository.getCustomerBankID(payment.getMerchantId());
+        try {
+
+            bank.transferMoneyFromTo(payerBankAccount, recieverBankAccount, new BigDecimal(payment.getAmount()),
+                    recieverBankAccount);
+
+            // Send payment to ReportMicroService
+            PaymentInformation p = new PaymentInformation();
+            p.setAmount(payment.getAmount());
+            p.setPayerId(request.getUserid());
+            p.setRecieverId(payment.getMerchantId().toString());
+            p.setToken(payment.getPayerToken().toString());
+            reportsInterface.add(p);
+            return true;
+        } catch (BankServiceException_Exception e) {
+            return false;
+        }
+
+    }
 
     public boolean addCustomer(Account customer) {
         return paymentRepository.addCustomer(customer);

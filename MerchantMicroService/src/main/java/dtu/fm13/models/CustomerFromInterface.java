@@ -22,20 +22,6 @@ public class CustomerFromInterface {
         this.lastName = address;
     }
 
-	/*
-	public Customer() {}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String address) {
-		this.lastName = address;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String name) {
-		this.firstName = name;
-	}*/
 
     @Override
     public boolean equals(Object o) {
@@ -49,21 +35,5 @@ public class CustomerFromInterface {
     public int hashCode() {
         return Objects.hash(dTUPayID);
     }
-
-
-/*	public String getCpr() {
-		return cpr;
-	}
-
-	public void setCpr(String cpr) {
-		this.cpr = cpr;
-	}*/
-	public UUID getId() {
-		return dTUPayID;
-	}
-
-	public void setId(UUID id) {
-		this.dTUPayID = id;
-	}
 
 }

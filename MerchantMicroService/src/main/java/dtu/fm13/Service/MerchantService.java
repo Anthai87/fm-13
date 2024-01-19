@@ -23,7 +23,6 @@ import dtu.fm13.models.Account;
      }
  
      public UUID createMerchant(Account cust) {
-         System.out.println("Create customer, with BankID :" + cust.getAccountID());
          Account merchant = new Account();
          merchant.setAccountID(cust.getAccountID());
          merchantRepository.addCustomer(merchant);

@@ -8,7 +8,8 @@ import java.util.UUID;
 
 import dtu.fm13.models.Account;
 import dtu.fm13.models.Payment;
-
+import lombok.Data;
+@Data
 public class AccountRepository {
 
     private List<Payment> payments = new ArrayList<>();
