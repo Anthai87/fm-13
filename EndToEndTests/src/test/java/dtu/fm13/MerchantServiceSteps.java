@@ -53,7 +53,7 @@ public class MerchantServiceSteps {
 
 		merchant.setId(response.readEntity(new GenericType<UUID>() {
 		}));
-
+		response.close();
 	}
 
 	@Then("the merchant is registered")
@@ -61,16 +61,19 @@ public class MerchantServiceSteps {
 		merchants = merchantInterface.merchantList();
 		assertEquals(200, response.getStatus());
 		assertTrue(merchants.contains(merchant));
+		response.close();
 	}
 
 	@When("the merchant is deleted")
 	public void theCustomerIsDeleted() {
 		response = merchantInterface.delete(merchant);
+		
 	}
 
 	@Then("the merchant is not registered")
 	public void theCustomerIsNotRegistered() {
 		assertEquals(200, response.getStatus());
+		response.close();
 	}
 
 	

@@ -13,7 +13,6 @@ import dtu.fm13.helpers.UserHelper;
 import dtu.fm13.interfaces.CustomerInterface;
 import dtu.fm13.interfaces.MerchantInterface;
 import dtu.fm13.interfaces.PaymentInterface;
-import dtu.fm13.interfaces.ReportsInterface;
 import dtu.fm13.models.Account;
 import dtu.fm13.models.Payment;
 import dtu.ws.fastmoney.BankService;
@@ -42,8 +41,6 @@ public class PaymentServiceSteps {
     private UserHelper userHelper = new UserHelper();
     private List<String> tokenList;
     private String token;
-    private List<Payment> reports;
-	private ReportsInterface reportsInterface = new ReportsInterface();
 
 
     // Harald & Elias
@@ -55,11 +52,13 @@ public class PaymentServiceSteps {
         String bankID = userHelper.getBankID(user);
         customer.setAccountID(bankID);
         Response response = customerService.create(customer);
+       
         customer.setId(response.readEntity(new GenericType<UUID>() {
         }));
         accounts.add(customer);
         assertNotNull(customer.getId());
-        assertNotNull(customer.getAccountID());
+        assertNotNull(customer.getAccountID()); 
+        response.close();
     }
 
     // Harald &Elias
@@ -71,12 +70,14 @@ public class PaymentServiceSteps {
         merchant.setAccountID(bankID);
         assertNotNull(merchant.getAccountID());
         Response response = merchantInterfaceService.create(merchant);
+        
         System.out.println("setting merchant id");
         merchant.setId(response.readEntity(new GenericType<UUID>() {
         }));
         assertNotNull(merchant.getId());
         assertNotNull(customer.getAccountID());
         accounts.add(merchant);
+        response.close();
     }
 
     // Harald
@@ -134,6 +135,7 @@ public class PaymentServiceSteps {
         Response response = customerService.create(customer);
         customer.setId(response.readEntity(new GenericType<UUID>() {
         }));
+        response.close();
         assertNotNull(customer.getId());
     }
 
@@ -164,8 +166,10 @@ public class PaymentServiceSteps {
     public void thatTheMerchantIsRegisteredWithDTUPay() {
 
         Response response = merchantInterfaceService.create(merchant);
+        
         merchant.setId(response.readEntity(new GenericType<UUID>() {
         }));
+        response.close();
         assertNotNull(merchant.getId());
 
     }

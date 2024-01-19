@@ -57,7 +57,7 @@ public class CustomerServiceSteps {
 
 		customer.setId(response.readEntity(new GenericType<UUID>() {
 		}));
-
+		response.close();
 	}
 
 	@Then("the customer is registered")
@@ -70,10 +70,13 @@ public class CustomerServiceSteps {
 	@When("the customer is deleted")
 	public void theCustomerIsDeleted() {
 		response =customerInterface.delete(customer);
+		response.close();
+
 	}
 
 	@Then("the customer is not registered")
 	public void theCustomerIsNotRegistered() {
 		assertEquals(200, response.getStatus());
+		response.close();
 	}
 }
