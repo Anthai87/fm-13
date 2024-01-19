@@ -14,6 +14,7 @@ import dtu.fm13.Payment.Interfaces.TokenInterface;
 import dtu.fm13.Payment.Repository.PaymentRepository;
 import dtu.fm13.Payment.models.Account;
 import dtu.fm13.Payment.models.Payment;
+import dtu.fm13.Payment.models.PaymentInformation;
 import dtu.fm13.Payment.models.TokenRequest;
 import dtu.ws.fastmoney.BankService;
 import dtu.ws.fastmoney.BankServiceException_Exception;
@@ -47,7 +48,12 @@ public class PaymentService {
                         recieverBankAccount);
                 
                 //Send payment to ReportMicroService
-                reportsInterface.add(payment);
+                PaymentInformation p= new PaymentInformation();
+                p.setAmount(payment.getAmount());
+                p.setPayerId(request.getUserid());
+                p.setRecieverId(payment.getMerchantId().toString());
+                p.setToken(payment.getPayerToken().toString());
+                reportsInterface.add(p);
                 return true;
             } catch (BankServiceException_Exception e) {
          

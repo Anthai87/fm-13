@@ -13,6 +13,7 @@ import dtu.fm13.helpers.UserHelper;
 import dtu.fm13.interfaces.CustomerInterface;
 import dtu.fm13.interfaces.MerchantInterface;
 import dtu.fm13.interfaces.PaymentInterface;
+import dtu.fm13.interfaces.ReportsInterface;
 import dtu.fm13.models.Account;
 import dtu.fm13.models.Payment;
 import dtu.ws.fastmoney.BankService;
@@ -27,9 +28,9 @@ import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.Response;
 
 public class PaymentServiceSteps {
-    private Account customer;
-    private Account merchant;
-    private List<Account> accounts = new ArrayList<Account>();
+    Account customer;
+    Account merchant;
+    List<Account> accounts = new ArrayList<Account>();
     private Payment payment;
     private PaymentInterface paymentService = new PaymentInterface();
     private int returncode;
@@ -41,6 +42,8 @@ public class PaymentServiceSteps {
     private UserHelper userHelper = new UserHelper();
     private List<String> tokenList;
     private String token;
+    private List<Payment> reports;
+	private ReportsInterface reportsInterface = new ReportsInterface();
 
 
     // Harald & Elias
@@ -91,35 +94,7 @@ public class PaymentServiceSteps {
         assertEquals(201, returncode);
     }
 
-    // Harald, Anthony
-    @Given("a successful payment of {int} kr from customer with name {string} to merchant {string}")
-    public void aSuccessfulPaymentOfKrFromCustomerToMerchant(Integer amount, String cust, String mer) {
-        User user = userHelper.getCustomer();
-        customer = new Account();
-        customer.setFirstName(cust);
-        String bankID = userHelper.getBankID(user);
-        customer.setAccountID(bankID);
-        Response response = customerService.create(customer);
-        customer.setId(response.readEntity(new GenericType<UUID>() {
-        }));
-
-        User user2 = userHelper.getCustomer();
-        merchant = new Account();
-        merchant.setFirstName(mer);
-        bankID = userHelper.getBankID(user2);
-        merchant.setAccountID(bankID);
-        response = merchantInterfaceService.create(merchant);
-        merchant.setId(response.readEntity(new GenericType<UUID>() {
-        }));
-        payment = new Payment();
-        payment.setPayerToken(UUID.fromString(token));
-        payment.setMerchantId(merchant.getId());
-        payment.setAmount(amount);
-        theMerchantInitiatesAPaymentForKrByTheCustomer(amount);
-        thePaymentIsSuccessful();
-        accounts.add(customer);
-        accounts.add(merchant);
-    }
+    
 
     // Anthony
     @When("the manager asks for a list of payments")
@@ -258,5 +233,5 @@ public class PaymentServiceSteps {
             }
         }
     }
-
+    
 }

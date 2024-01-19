@@ -4,6 +4,7 @@ package dtu.fm13.Payment.Interfaces;
 
 
 import dtu.fm13.Payment.models.Payment;
+import dtu.fm13.Payment.models.PaymentInformation;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -21,7 +22,7 @@ public class ReportInterface {
 	this.webTarget = client.target("http://reportservice:8080");
 	}
 	
-	public int add(Payment payment) {
+	public int add(PaymentInformation payment) {
 	 	WebTarget personWebTarget = webTarget.path("/reports");
 	 	Invocation.Builder invocationBuilder = personWebTarget.request();
 	 	Response response = invocationBuilder.post(Entity.entity(payment, MediaType.APPLICATION_JSON));

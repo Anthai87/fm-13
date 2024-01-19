@@ -3,7 +3,10 @@
 package dtu.fm13.interfaces;
 
 import java.util.List;
+import java.util.UUID;
+
 import dtu.fm13.models.Payment;
+import dtu.fm13.models.PaymentInformation;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Invocation;
@@ -31,11 +34,20 @@ public class ReportsInterface {
 		return paymentList;
 	}
 
-    public List<Payment> payments() {
+    public List<PaymentInformation> payments() {
 		WebTarget personWebTarget = webTarget.path("/reports");
 		Invocation.Builder invocationBuilder = personWebTarget.request();
 		Response response = invocationBuilder.get();
-		List<Payment> paymentList = response.readEntity(new GenericType<List<Payment>>() {});
+		List<PaymentInformation> paymentList = response.readEntity(new GenericType<List<PaymentInformation>>() {});
+		
+		return paymentList;
+    }
+
+    public List<PaymentInformation> payments(UUID id) {
+        WebTarget personWebTarget = webTarget.path("/reports/" + id);
+		Invocation.Builder invocationBuilder = personWebTarget.request();
+		Response response = invocationBuilder.get();
+		List<PaymentInformation> paymentList = response.readEntity(new GenericType<List<PaymentInformation>>() {});
 		
 		return paymentList;
     }

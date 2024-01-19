@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.UUID;
 
 import dtu.fm13.interfaces.MerchantInterface;
+import dtu.fm13.interfaces.ReportsInterface;
 import dtu.fm13.models.Account;
+import dtu.fm13.models.Payment;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -23,9 +25,7 @@ public class MerchantServiceSteps {
 	MerchantInterface merchantInterface = new MerchantInterface();
 	private List<Account> merchants = new ArrayList<Account>();
 	private Response response;
-
-
-
+	
 	@Then("I get a merchant with name {string} and address {string}")
 	public void iGetAPersonWithNameAndAddress(String firstName, String lastName) {
 		// Write code here that turns the phrase above into concrete actions
@@ -65,11 +65,14 @@ public class MerchantServiceSteps {
 
 	@When("the merchant is deleted")
 	public void theCustomerIsDeleted() {
-		response =merchantInterface.delete(merchant);
+		response = merchantInterface.delete(merchant);
 	}
 
 	@Then("the merchant is not registered")
 	public void theCustomerIsNotRegistered() {
 		assertEquals(200, response.getStatus());
 	}
+
+	
+
 }
