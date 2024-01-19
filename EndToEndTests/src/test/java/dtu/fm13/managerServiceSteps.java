@@ -25,24 +25,18 @@ public class managerServiceSteps {
         assertTrue(reports.size() > 0);
     }
 
-    @Then("all payments contains only customers ID")
-    public void allPaymentsContainsOnlyCustomersID() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-
     // Harald, Anthony
     @Given("a successful payment of {int} kr from customer with name {string} to merchant {string}")
     public void aSuccessfulPaymentOfKrFromCustomerToMerchant(Integer amount, String cust, String mer) {
-        //creating accounts in bank and DTU-Pay
+        // creating accounts in bank and DTU-Pay
         paymentServiceSteps.aCustomerWithABankAccountWithBalance(1000);
         paymentServiceSteps.thatTheCustomerIsRegisteredWithDTUPay();
         paymentServiceSteps.aMerchantWithABankAccountWithBalance(1000);
         paymentServiceSteps.thatTheMerchantIsRegisteredWithDTUPay();
-        //Tokens
+        // Tokens
         paymentServiceSteps.aCustomerRequestsTokens();
         paymentServiceSteps.customerGivesTheMerchantAToken();
-        //transaction and saving accounts for destruction at @after
+        // transaction and saving accounts for destruction at @after
         paymentServiceSteps.theMerchantInitiatesAPaymentForKrByTheCustomer(amount);
         paymentServiceSteps.thePaymentIsSuccessful();
         paymentServiceSteps.accounts.add(paymentServiceSteps.customer);
@@ -59,7 +53,25 @@ public class managerServiceSteps {
     public void allPaymentsContainsOnlyMerchantsID() {
         boolean test = true;
         for (PaymentInformation p : reports) {
-            if (!(p.getRecieverId().equals(paymentServiceSteps.merchant.getId().toString()))) {
+            if (!(p.getPayerId().equals(paymentServiceSteps.merchant.getId().toString())
+                    || p.getRecieverId().equals(paymentServiceSteps.merchant.getId().toString()))) {
+                test = false;
+            }
+        }
+        assertTrue(test);
+    }
+
+    @Given("a Customer asks for a list of payments")
+    public void aCustomerAsksForAListOfPayments() {
+        reports = reportsInterface.payments(paymentServiceSteps.customer.getId());
+    }
+
+    @Then("all payments contains only customers ID")
+    public void allPaymentsContainsOnlyCustomersID() {
+        boolean test = true;
+        for (PaymentInformation p : reports) {
+            if (!(p.getPayerId().equals(paymentServiceSteps.customer.getId().toString())
+                    || p.getRecieverId().equals(paymentServiceSteps.customer.getId().toString()))) {
                 test = false;
             }
         }
